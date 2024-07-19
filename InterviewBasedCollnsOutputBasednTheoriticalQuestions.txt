@@ -1,0 +1,4272 @@
+
+Program based questions from here
+https://www.indiabix.com/java-programming/declarations-and-access-control/discussion-56#comments
+=============================
+https://www.indiabix.com/technical/java-basics/
+https://www.interviewbit.com/java-interview-questions/#intermediate
+
+https://www.indiabix.com/java-programming/declarations-and-access-control/004001
+
+https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/?ref=shm
+
+https://www.digitalocean.com/community/tutorials/java-programming-interview-questions
+
+https://www.scientecheasy.com/2021/02/inheritance-interview-questions.html/
+
+IndiaBix
+TutorialsPoint
+Java Guides
+interviewbit.com
+InterviewBased Questions Output based and Theoritical Questions
+===============
+TIME COMPLEXITY:
+https://www.interviewbit.com/courses/programming/time-complexity/asymptotic-notations/
+
+https://www.geeksforgeeks.org/practice-questions-time-complexity-analysis/
+https://www.educative.io/courses/data-structures-coding-interviews-java/complexity-interview-questions
+
+https://interviews.school/timecomplexity
+----------------------
+Sorting & Searching
+https://www.interviewkickstart.com/learn/sorting-algorithms
+
+https://www.techiedelight.com/sorting-interview-questions/ [TO USE FOR SORTING & SEARCHING]
+
+------------------
+Data Structures  Currently using 5 Oct 2023(stack BST etc)
+
+https://www.techiedelight.com/sorting-interview-questions/ 
+
+https://www.mygreatlearning.com/blog/data-structures-using-java/
+
+https://www.geeksforgeeks.org/data-structures/linked-list/?ref=lbp
+
+https://www.geeksforgeeks.org/insertion-in-linked-list/
+===============================================================================================================
+THREADS
+What is the name of the method used to start a thread execution?
+a) init();
+b) start();
+c) run();
+d) resume();
+Answer: Option b
+Explanation:
+Option B is Correct. The start() method causes this thread to begin execution; the Java Virtual Machine calls the run method of this thread.
+
+Option A is wrong. There is no init() method in the Thread class.
+
+Option C is wrong. The run() method of a thread is like the main() method to an application. Starting the thread causes the object's run method to be called in that separately executing thread.
+
+Option D is wrong. The resume() method is deprecated. It resumes a suspended thread.
+--------------------------------
+Which two are valid constructors for Thread?
+1) Thread(Runnable r, String name)
+2) Thread()
+3) Thread(int priority)
+4) Thread(Runnable r, ThreadGroup g)
+5) Thread(Runnable r, int priority)
+a) 1 and 3
+b) 2 and 4
+c) 1 and 2
+d) 2 and 5
+Answer: Option c
+Explanation:
+(1) and (2) are both valid constructors for Thread.
+
+(3), (4), and (5) are not legal Thread constructors, although (4) is close. 
+If you reverse the arguments in (4), you'd have a valid constructor.
+--------------------------
+
+Which three are methods of the Object class?
+1) notify();
+2) notifyAll();
+3) isInterrupted();
+4) synchronized();
+5) interrupt();
+6) wait(long msecs);
+7) sleep(long msecs);
+8) yield();
+
+a) 1, 2, 4
+b) 2, 4, 5
+c) 1, 2, 6
+d) 2, 3, 4
+
+Answer: Option c
+Explanation:
+(1), (2), and (6) are correct. They are all related to the list of threads waiting on the specified object.
+
+(3), (5), (7), and (8) are incorrect answers. The methods isInterrupted() and interrupt() are instance methods of Thread.
+
+The methods sleep() and yield() are static methods of Thread.
+
+D is incorrect because synchronized is a keyword and the synchronized() construct is part of the Java language.
+------------------------------------
+Which two of the following methods are defined in class Thread?
+1) start()
+2) wait()
+3) notify()
+4) run()
+5) terminate()
+
+a) 1 and 4
+b) 2 and 3
+c) 3 and 4
+d) 2 and 4
+
+Answer: Option a
+
+Explanation:
+(1) and (4). Only start() and run() are defined by the Thread class.
+
+(2) and (3) are incorrect because they are methods of the Object class. 
+(5) is incorrect because there's no such method in any thread-related class.
+----------------------------------------
+Which method must be defined by a class implementing the java.lang.Runnable interface?
+a) void run()
+b) public void run()
+c) public void start()
+d) void run(int priority)
+Answer: Option b
+Explanation:
+Option B is correct because in an interface all methods are abstract by default therefore they must be overridden by the implementing class. The Runnable interface only contains 1 method, the void run() method therefore it must be implemented.
+
+Option A and D are incorrect because they are narrowing the access privileges i.e. package(default) access is narrower than public access.
+
+Option C is not method in the Runnable interface therefore it is incorrect.
+------------------------------
+
+What will be the output of the program?
+class MyThread extends Thread 
+{
+    MyThread() 
+    {
+        System.out.print(" MyThread");
+    }
+    public void run() 
+    {
+        System.out.print(" bar");
+    }
+    public void run(String s) 
+    {
+        System.out.println(" baz");
+    }
+}
+public class TestThreads 
+{
+    public static void main (String [] args) 
+    {
+        Thread t = new MyThread() 
+        {
+            public void run() 
+            {
+                System.out.println(" foo");
+            }
+        };
+        t.start();
+    }
+}
+a) foo
+b) MyThread foo
+c) MyThread bar
+d) foo bar
+Answer: Option b
+Explanation:
+Option B is correct because in the first line of main we're constructing an instance of an anonymous inner class extending from MyThread. 
+So the MyThread constructor runs and prints "MyThread". 
+The next statement in main invokes start() on the new thread instance, 
+which causes the overridden run() method (the run() method defined in the anonymous inner class) to be invoked, which prints "foo"
+-------------------------
+What will be the output of the program?
+class MyThread extends Thread 
+{
+    public static void main(String [] args) 
+    {
+        MyThread t = new MyThread();
+        t.start();
+        System.out.print("one. ");
+        t.start();
+        System.out.print("two. ");
+    }
+    public void run() 
+    {
+        System.out.print("Thread ");
+    }
+}
+
+a) Compilation fails
+b) An exception occurs at runtime.
+c) It prints "Thread one. Thread two."
+d) The output cannot be determined.
+
+Answer: Option b
+
+Explanation:
+When the start() method is attempted a second time on a single Thread object, 
+the method will throw an IllegalThreadStateException (you will not need to know this exception name for the exam). 
+Even if the thread has finished running, it is still illegal to call start() again.
+
+----------------------------------------------
+What will be the output of the program?
+class MyThread extends Thread 
+{ 
+    MyThread() {} 
+    MyThread(Runnable r) {super(r); } 
+    public void run() 
+    { 
+        System.out.print("Inside Thread ");
+    } 
+} 
+class MyRunnable implements Runnable 
+{ 
+    public void run() 
+    { 
+        System.out.print(" Inside Runnable"); 
+    } 
+} 
+class Test 
+{  
+    public static void main(String[] args) 
+    { 
+        new MyThread().start(); 
+        new MyThread(new MyRunnable()).start(); 
+    } 
+}
+a) Prints "Inside Thread Inside Thread"
+b) Prints "Inside Thread Inside Runnable"
+c) Does not compile
+d) Throws exception at runtime
+
+Answer: Option a
+Explanation:
+If a Runnable object is passed to the Thread constructor, then the run method of the Thread class will invoke the run method of the Runnable object.
+
+In this case, however, the run method in the Thread class is overridden by the run method in MyThread class. Therefore the run() method in MyRunnable is never invoked.
+
+Both times, the run() method in MyThread is invoked instead.
+--------------------------------------------------
+What will be the output of the program?
+class s1 implements Runnable 
+{ 
+    int x = 0, y = 0; 
+    int addX() {x++; return x;} 
+    int addY() {y++; return y;} 
+    public void run() { 
+    for(int i = 0; i < 10; i++) 
+        System.out.println(addX() + " " + addY()); 
+} 
+    public static void main(String args[]) 
+    { 
+        s1 run1 = new s1(); 
+        s1 run2 = new s1(); 
+        Thread t1 = new Thread(run1); 
+        Thread t2 = new Thread(run2); 
+        t1.start(); 
+        t2.start(); 
+    } 
+}
+
+a) Compile time Error: There is no start() method
+b) Will print in this order: 1 1 2 2 3 3 4 4 5 5...
+c) Will print but not exactly in an order (e.g: 1 1 2 2 1 1 3 3...)
+d) Will print in this order: 1 2 3 4 5 6... 1 2 3 4 5 6...
+
+Answer: Option c
+Explanation:
+Both threads are operating on different sets of instance variables. 
+If you modify the code of the run() method to print the thread name it will help to clarify the output:
+
+public void run()
+{
+for(int i = 0; i < 10; i++)
+
+System.out.println(
+Thread.currentThread().getName() + ": " + addX() + " " + addY()
+);
+
+}
+-------------------------------------
+What will be the output of the program?
+public class Q126 implements Runnable 
+{ 
+    private int x; 
+    private int y; 
+
+    public static void main(String [] args) 
+    { 
+        Q126 that = new Q126(); 
+        (new Thread(that)).start( ); /* Line 8 */
+        (new Thread(that)).start( ); /* Line 9 */
+    } 
+    public synchronized void run( ) /* Line 11 */
+    { 
+        for (;;) /* Line 13 */
+        { 
+            x++; 
+            y++; 
+            System.out.println("x = " + x + "y = " + y); 
+        } 
+    } 
+}
+a) An error at line 11 causes compilation to fail
+b) Errors at lines 8 and 9 cause compilation to fail.
+c) The program prints pairs of values for x and y that might not always be the same on the same line (for example, "x=2, y=1")
+d) The program prints pairs of values for x and y that are always the same on the same line (for example, "x=1, y=1". 
+In addition, each value appears once (for example, "x=1, y=1" followed by "x=2, y=2")
+
+
+Answer: Option d
+Explanation:
+The synchronized code is the key to answering this question. 
+Because x and y are both incremented inside the synchronized method they are always incremented together. 
+Also keep in mind that the two threads share the same reference to the Q126 object.
+
+Also note that because of the infinite loop at line 13, only one thread ever gets to execute.
+-------------------------------------------
+What will be the output of the program?
+class s1 extends Thread
+{ 
+    public void run() 
+    { 
+        for(int i = 0; i < 3; i++) 
+        { 
+            System.out.println("A"); 
+            System.out.println("B"); 
+        } 
+    } 
+} 
+class Test120 extends Thread 
+{ 
+    public void run() 
+    { 
+        for(int i = 0; i < 3; i++) 
+        { 
+            System.out.println("C"); 
+            System.out.println("D"); 
+        } 
+    } 
+    public static void main(String args[]) 
+        { 
+        s1 t1 = new s1(); 
+        Test120 t2 = new Test120(); 
+        t1.start(); 
+        t2.start(); 
+    } 
+}
+a) Compile time Error There is no start() method
+b) Will print in this order AB CD AB...
+c) Will print but not be able to predict the Order
+d) Will print in this order ABCD...ABCD...
+
+Answer: Option c
+Explanation:
+We cannot predict the order in which threads are going to run.
+------------------------
+
+What will be the output of the program?
+public class ThreadDemo 
+{ 
+    private int count = 1; 
+    public synchronized void doSomething() 
+    { 
+        for (int i = 0; i < 10; i++) 
+            System.out.println(count++); 
+    } 
+    public static void main(String[] args) 
+    { 
+        ThreadDemo demo = new ThreadDemo(); 
+        Thread a1 = new A(demo); 
+        Thread a2 = new A(demo); 
+        a1.start(); 
+        a2.start(); 
+    } 
+} 
+class A extends Thread 
+{ 
+    ThreadDemo demo; 
+    public A(ThreadDemo td) 
+    { 
+        demo = td; 
+    } 
+    public void run() 
+    { 
+        demo.doSomething(); 
+    } 
+}
+a) It will print the numbers 0 to 19 sequentially
+b) It will print the numbers 1 to 20 sequentially
+c) It will print the numbers 1 to 20, but the order cannot be determined
+d) The code will not compile.
+Answer: Option b
+Explanation:
+You have two different threads that share one reference to a common object.
+
+The updating and output takes place inside synchronized code.
+
+One thread will run to completion printing the numbers 1-10.
+
+The second thread will then run to completion printing the numbers 11-20.
+------------------
+What will be the output of the program?
+public class ThreadTest extends Thread 
+{ 
+    public void run() 
+    { 
+        System.out.println("In run"); 
+        yield(); 
+        System.out.println("Leaving run"); 
+    } 
+    public static void main(String []argv) 
+    { 
+        (new ThreadTest()).start(); 
+    } 
+}
+a) The code fails to compile in the main() method
+b) The code fails to compile in the run() method
+c) Only the text "In run" will be displayed
+d) The text "In run" followed by "Leaving run" will be displayed
+
+Answer: Option d
+Explanation:
+No answer description is available directly to be discussed
+----------------------------------
+What will be the output of the program?
+public class Test107 implements Runnable 
+{ 
+    private int x; 
+    private int y; 
+
+    public static void main(String args[]) 
+    {
+        Test107 that = new Test107(); 
+        (new Thread(that)).start(); 
+        (new Thread(that)).start(); 
+    } 
+    public synchronized void run() 
+    {
+        for(int i = 0; i < 10; i++) 
+        { 
+            x++; 
+            y++; 
+            System.out.println("x = " + x + ", y = " + y); /* Line 17 */
+        } 
+    } 
+} 
+
+a) Compilation error.
+b) Will print in this order: x = 1 y = 1 x = 2 y = 2 x = 3 y = 3 x = 4 y = 4 x = 5 y = 5... 
+but the output will be produced by both threads running simultaneously.
+c) Will print in this order: x = 1 y = 1 x = 2 y = 2 x = 3 y = 3 x = 4 y = 4 x = 5 y = 5... 
+but the output will be produced by first one thread then the other. This is guaranteed by the synchronised code.
+d) Will print in this order x = 1 y = 2 x = 3 y = 4 x = 5 y = 6 x = 7 y = 8...
+Answer: Option c
+Explanation:
+Both threads are operating on the same instance variables. 
+Because the code is synchronized the first thread will complete before the second thread begins. 
+Modify line 17 to print the thread names:
+
+System.out.println(Thread.currentThread().getName() + " x = " + x + ", y = " + y);
+--------------------------------------
+What will be the output of the program?
+class MyThread extends Thread 
+{
+    public static void main(String [] args) 
+    {
+        MyThread t = new MyThread();
+        Thread x = new Thread(t);
+        x.start(); /* Line 7 */
+    }
+    public void run() 
+    {
+        for(int i = 0; i < 3; ++i) 
+        {
+            System.out.print(i + "..");
+        }
+    }
+}
+
+a) Compilation fails.
+b) 1..2..3..
+c) 0..1..2..3..
+d) 0..1..2..
+
+Answer: Option d
+
+Explanation:
+The thread MyThread will start and loop three times (from 0 to 2).
+
+Option A is incorrect because the Thread class implements the Runnable interface; therefore, in line 7, 
+Thread can take an object of type Thread as an argument in the constructor.
+
+Option B and C are incorrect because the variable i in the for loop starts with a value of 0 and ends with a value of 2.
+
+
+
+---------------------------------------
+What will be the output of the program?
+public class SyncTest 
+{
+    public static void main (String [] args) 
+    {
+        Thread t = new Thread() 
+        {
+            Foo f = new Foo();
+            public void run() 
+            {
+                f.increase(20);
+            }
+        };
+    t.start();
+    }
+}
+class Foo 
+{
+    private int data = 23;
+    public void increase(int amt) 
+    {
+        int x = data;
+        data = x + amt;
+    }
+}
+and assuming that data must be protected from corruption, what if anything can you add to the preceding code to ensure the integrity of data?
+
+a) Synchronize the run method.
+b) Wrap a synchronize(this) around the call to f.increase().
+c) The existing code will cause a runtime exception.
+d) Synchronize the increase() method
+
+Answer: Option d
+Explanation:
+Option D is correct because synchronizing the code that 
+actually does the increase will protect the code from being accessed by more than one thread at a time.
+
+Option A is incorrect because synchronizing the run() 
+method would stop other threads from running the run() method (a bad idea) but still would not 
+prevent other threads with other runnables from accessing the increase() method.
+
+Option B is incorrect for virtually the same reason as synchronizing the code that calls the 
+increase() method does not prevent other code from calling the increase() method.
+
+----------------------------------------------------
+EXCEPTION HANDLING
+What will be the output of the program?
+public class Foo 
+{  
+    public static void main(String[] args) 
+    {
+        try 
+        { 
+            return; 
+        } 
+        finally 
+        {
+            System.out.println( "Finally" ); 
+        } 
+    } 
+}
+a) Finally
+b) Compilation fails.
+c) The code runs with no output.
+d) An exception is thrown at runtime.
+Answer: Option a
+Explanation:
+If you put a finally block after a try and its associated catch blocks, then once execution enters the try block, the code in that finally block will definitely be executed except in the following circumstances:
+An exception arising in the finally block itself.
+The death of the thread.
+The use of System.exit()
+Turning off the power to the CPU.
+
+2)
+What will be the output of the program?
+try 
+{ 
+    int x = 0; 
+    int y = 5 / x; 
+} 
+catch (Exception e) 
+{
+    System.out.println("Exception"); 
+} 
+catch (ArithmeticException ae) 
+{
+    System.out.println(" Arithmetic Exception"); 
+} 
+System.out.println("finished");
+
+a) finished
+b) Exception
+c) Compilation fails.
+d) Arithmetic Exception
+
+Answer: Option c
+
+Explanation:
+Compilation fails because ArithmeticException has already been caught. 
+ArithmeticException is a subclass of java.lang.Exception, 
+by time the ArithmeticException has been specified it has already been caught by the Exception class.
+
+If ArithmeticException appears before Exception, then the file will compile. 
+When catching exceptions the more specific exceptions must be listed before the more general 
+(the subclasses must be caught before the superclasses).
+
+Q 3)
+
+What will be the output of the program?
+public class X 
+{  
+    public static void main(String [] args) 
+    {
+        try 
+        {
+            badMethod();  
+            System.out.print("A"); 
+        }  
+        catch (Exception ex) 
+        {
+            System.out.print("B");  
+        } 
+        finally 
+        {
+            System.out.print("C"); 
+        } 
+        System.out.print("D"); 
+    }  
+    public static void badMethod() 
+    {
+        throw new Error(); /* Line 22 */
+    } 
+}
+
+
+a) ABCD
+b) Compilation fails.
+c) C is printed before exiting with an error message.
+d) BC is printed before exiting with an error message.
+Answer: Option c
+Explanation:
+Error is thrown but not recognised line(22) 
+because the only catch attempts to catch an Exception and Exception is not a superclass of Error. 
+Therefore only the code in the finally statement can be run before exiting 
+with a runtime error (Exception in thread "main" java.lang.Error).
+
+---------------
+Q 4
+What will be the output of the program?
+public class X 
+{  
+    public static void main(String [] args) 
+    {
+        try 
+        {
+            badMethod();  
+            System.out.print("A");  
+        } 
+        catch (RuntimeException ex) /* Line 10 */
+        { 
+            System.out.print("B"); 
+        } 
+        catch (Exception ex1) 
+        { 
+            System.out.print("C"); 
+        } 
+        finally 
+        {
+            System.out.print("D"); 
+        } 
+        System.out.print("E"); 
+    } 
+    public static void badMethod() 
+    { 
+        throw new RuntimeException(); 
+    } 
+}
+
+a) BD
+b) BCD
+c) BDE
+d) BCDE
+Answer: Option c
+Explanation:
+A Run time exception is thrown and caught in the catch statement on line 10. 
+All the code after the finally statement is run because the exception has been caught.
+------------------------
+What will be the output of the program?
+public class RTExcept 
+{
+    public static void throwit () 
+    {
+        System.out.print("throwit ");
+        throw new RuntimeException();
+    }
+    public static void main(String [] args) 
+    {
+        try 
+        {
+            System.out.print("hello ");
+            throwit();
+        }
+        catch (Exception re ) 
+        {
+            System.out.print("caught ");
+        }
+        finally 
+        {
+            System.out.print("finally ");
+        }
+        System.out.println("after ");
+    }
+}
+
+a) hello throwit caught
+b) Compilation fails
+c) hello throwit RuntimeException caught after
+d) hello throwit caught finally after
+Answer: Option d
+Explanation:
+The main() method properly catches and handles the RuntimeException in the catch block, 
+finally runs (as it always does), and then the code returns to normal.
+
+A, B and C are incorrect based on the program logic described above. 
+Remember that properly handled exceptions do not cause the program to stop executing.
+-------------------
+What will be the output of the program?
+public class Test 
+{  
+    public static void aMethod() throws Exception 
+    {
+        try /* Line 5 */
+        {
+            throw new Exception(); /* Line 7 */
+        } 
+        finally /* Line 9 */
+        {
+            System.out.print("finally "); /* Line 11 */
+        } 
+    } 
+    public static void main(String args[]) 
+    {
+        try 
+        {
+            aMethod();  
+        } 
+        catch (Exception e) /* Line 20 */
+        {
+            System.out.print("exception "); 
+        } 
+        System.out.print("finished"); /* Line 24 */
+    } 
+}
+a) finally
+b) exception finished
+c) finally exception finished
+d) Compilation fails
+
+Answer: Option c
+Explanation:
+This is what happens:
+
+(1) The execution of the try block (line 5) completes abruptly because of the throw statement (line 7).
+
+(2) The exception cannot be assigned to the parameter of any catch clause of the try statement therefore the finally block is executed (line 9) and "finally" is output (line 11).
+
+(3) The finally block completes normally, and then the try statement completes abruptly because of the throw statement (line 7).
+
+(4) The exception is propagated up the call stack and is caught by the catch in the main method (line 20). This prints "exception".
+
+(5) Lastly program execution continues, because the exception has been caught, and "finished" is output (line 24).
+----------------
+What will be the output of the program?
+public class X 
+{ 
+    public static void main(String [] args) 
+    {
+        try 
+        {
+            badMethod();  
+            System.out.print("A"); 
+        }  
+        catch (Exception ex) 
+        {
+            System.out.print("B"); 
+        }  
+        finally 
+        {
+            System.out.print("C"); 
+        }  
+        System.out.print("D"); 
+    }  
+    public static void badMethod() {} 
+} 
+a) AC
+b) BC
+c) ACD
+d) ABCD
+Answer: Option c
+Explanation:
+There is no exception thrown, so all the code with the exception of the catch statement block is run.
+-------------------------
+What will be the output of the program?
+public class X 
+{  
+    public static void main(String [] args) 
+    {
+        try 
+        {
+            badMethod(); /* Line 7 */
+            System.out.print("A"); 
+        } 
+        catch (Exception ex) /* Line 10 */
+        {
+            System.out.print("B"); /* Line 12 */
+        } 
+        finally /* Line 14 */
+        {
+            System.out.print("C"); /* Line 16 */
+        }  
+        System.out.print("D"); /* Line 18 */
+    } 
+    public static void badMethod() 
+    {
+        throw new RuntimeException(); 
+    } 
+}
+a) AB
+b) BC
+c) ABC
+d) BCD
+
+Answer: Option d
+Explanation:
+(1) A RuntimeException is thrown, this is a subclass of exception.
+
+(2) The exception causes the try to complete abruptly (line 7) therefore line 8 is never executed.
+
+(3) The exception is caught (line 10) and "B" is output (line 12)
+
+(4) The finally block (line 14) is always executed and "C" is output (line 16).
+
+(5) The exception was caught, so the program continues with line 18 and outputs "D".
+-------------------------
+What will be the output of the program?
+public class MyProgram 
+{
+    public static void main(String args[])
+    {
+        try 
+        {
+            System.out.print("Hello world ");
+        }
+        finally 
+        {
+            System.out.println("Finally executing ");
+        }
+    }
+}
+a) Nothing. The program will not compile because no exceptions are specified.
+b) Nothing. The program will not compile because no catch clauses are specified.
+c) Hello world.
+d) Hello world Finally executing
+
+Answer: Option d
+Explanation:
+Finally clauses are always executed. 
+The program will first execute the try block, printing Hello world, and will then execute the finally block, printing Finally executing.
+Option A, B, and C are incorrect based on the program logic described above. 
+Remember that either a catch or a finally statement must follow a try. Since the finally is present, the catch is not required.
+----------------
+What will be the output of the program?
+class Exc0 extends Exception { } 
+class Exc1 extends Exc0 { } /* Line 2 */
+public class Test 
+{  
+    public static void main(String args[]) 
+    { 
+        try 
+        {  
+            throw new Exc1(); /* Line 9 */
+        } 
+        catch (Exc0 e0) /* Line 11 */
+        {
+            System.out.println("Ex0 caught"); 
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("exception caught");  
+        } 
+    } 
+}
+
+a) Ex0 caught
+b) exception caught
+c) Compilation fails because of an error at line 2.
+d) Compilation fails because of an error at line 9.
+Answer: Option  a
+Explanation:
+An exception Exc1 is thrown and is caught by the catch statement on line 11. 
+The code is executed in this block. There is no finally block of code to execute.
+------------------
+Line 1 import java.io.*;
+	public class MyProgram 
+	{
+    		public static void main(String args[])
+    		{
+        	FileOutputStream out = null;
+        	try 
+        	{
+            	out = new FileOutputStream("test.txt");
+            	out.write(122);
+        	}
+        	catch(IOException io) 
+        	{
+            	System.out.println("IO Error.");
+        	}
+        	finally 
+        	{
+            	out.close();
+        	}
+    	}
+Line 21 }
+and given that all methods of class FileOutputStream, including close(), throw an IOException, which of these is true?
+a) This program will compile successfully.
+b) This program fails to compile due to an error at line 4.
+c) This program fails to compile due to an error at line 6.
+d) This program fails to compile due to an error at line 18.
+Answer: Option d
+Explanation:
+Any method (in this case, the main() method) that throws a checked exception (in this case, out.close() ) 
+must be called within a try clause, or the method must declare that it throws the exception. 
+Either main() must declare that it throws an exception, 
+or the call to out.close() in the finally block must fall inside a (in this case nested) try-catch block.
+----------------------
+public class MyProgram 
+{
+    public static void throwit() 
+    {
+        throw new RuntimeException();
+    }
+    public static void main(String args[])
+    {
+        try 
+        {
+            System.out.println("Hello world ");
+            throwit();
+            System.out.println("Done with try block ");
+        }
+        finally 
+        {
+            System.out.println("Finally executing ");
+        }
+    }
+}
+
+which answer most closely indicates the behavior of the above program?
+a) The program will not compile.
+b) The program will print Hello world, then will print that a RuntimeException has occurred, then will print Done with try block, and then will print Finally executing.
+c) The program will print Hello world, then will print that a RuntimeException has occurred, and then will print Finally executing.
+d) The program will print Hello world, then will print Finally executing, then will print that a RuntimeException has occurred.
+Answer: Option  d
+Explanation:
+Once the program throws a RuntimeException (in the throwit() method) that is not caught, 
+the finally block will be executed and the program will be terminated. If a method does not handle an exception, 
+the finally block is executed before the exception is propagated.
+-------------------------
+public class ExceptionTest 
+{ 
+    class TestException extends Exception {} 
+    public void runTest() throws TestException {} 
+    public void test() /* Point X */ 
+    { 
+        runTest(); 
+    } 
+}
+At Point X on line 5, which code is necessary to make the code compile?
+a) No code is necessary.
+b) throws Exception
+c) catch ( Exception e )
+d) throws RuntimeException
+
+Answer: Option b
+Explanation:
+Option B is correct. This works because it DOES throw an exception if an error occurs.
+
+Option A is wrong. If you compile the code as given the compiler will complain:
+
+"unreported exception must be caught or declared to be thrown" The class extends Exception so we are forced to test for exceptions.
+
+Option C is wrong. The catch statement belongs in a method body not a method specification.
+
+Option D is wrong. TestException is a subclass of Exception therefore the test method, in this example, 
+must throw TestException or some other class further up the Exception tree. 
+Throwing RuntimeException is just not on as this belongs in the java.lang.RuntimeException branch (it is not a superclass of TestException). 
+The compiler complains with the same error as in A above.
+--------------------------
+System.out.print("Start ");
+try 
+{
+    System.out.print("Hello world");
+    throw new FileNotFoundException();
+}
+System.out.print(" Catch Here "); /* Line 7 */
+catch(EOFException e) 
+{
+    System.out.print("End of file exception");
+}
+catch(FileNotFoundException e) 
+{
+    System.out.print("File not found");
+}
+and given that EOFException and FileNotFoundException are both subclasses of IOException, 
+and further assuming this block of code is placed into a class, which statement is most true concerning this code?
+a) The code will not compile.
+b) Code output: Start Hello world File Not Found.
+c) Code output: Start Hello world End of file exception.
+d) Code output: Start Hello world Catch Here File not found.
+
+Answer: Option a
+Explanation:
+Line 7 will cause a compiler error. The only legal statements after try blocks are either catch or finally statements.
+
+Option B, C, and D are incorrect based on the program logic described above. 
+If line 7 was removed, the code would compile and the correct answer would be Option B.
+---------------------------------
+
+Which statement is true?
+a) catch(X x) can catch subclasses of X where X is a subclass of Exception.
+b) The Error class is a RuntimeException.
+c) Any statement that can throw an Error must be enclosed in a try block.
+d) Any statement that can throw an Exception must be enclosed in a try block.
+Answer: Option a
+Explanation:
+Option A is correct. If the class specified in the catch clause does have subclasses, any exception object that subclasses the specified class will be caught as well.
+
+Option B is wrong. The error class is a subclass of Throwable and not Runtime Exception.
+
+Option C is wrong. You do not catch this class of error.
+
+Option D is wrong. An exception can be thrown to the next method higher up the call stack.
+===============================================================================================================
+
+
+1)
+What will be the Output of the below code:
+
+
+public class A {
+    public static void main(String[] args)
+    {
+        int $_ = 5;
+    }
+}
+
+Choices:
+
+a) Nothing
+b) Error
+Answer: a) Nothing
+Reason: It looks like $ will cause an error, but it won’t. In java, identifier rule says, identifier can start with any alphabet or underscore (“_”) or dollar (“$”). So answer is Nothing.
+
+--------------------------------------------------------------
+What will be the Output of the below code:
+public class Demo{
+    public static void main(String[] arr){
+        Integer num1 = 100;
+        Integer num2 = 100;
+        Integer num3 = 500;
+        Integer num4 = 500;
+          
+        if(num1==num2){
+            System.out.println("num1 == num2");
+        }
+        else{
+            System.out.println("num1 != num2");
+        }
+        if(num3 == num4){
+            System.out.println("num3 == num4");
+        }
+        else{
+            System.out.println("num3 != num4");
+        }
+    }
+}
+
+Choices:
+
+a) num1 == num2
+    num3 == num4
+b) num1 == num2
+    num3 != num4
+c) num1 != num2
+    num3 == num4
+d) num1 != num2
+    num3 != num4
+Answer: b)num1 == num2
+                  num3 != num4
+Reason: We always thought that whenever two object references are compared using “==”, it always evaluates to “false”. But here Integer caching changes the results.Integer class has a caching range of -128 to 127. Whenever a number is between this range and autoboxing is used, it assigns the same reference. That’s why for value 100, both num1 and num2 will have the same reference, but for the value 500 (not in the range of -128 to 127), num3 and num4 will have different reference.
+-------------------------------------------
+What happens if both superclass and subclass have a field with the same name?
+
+Ans: Only subclass members are accessible if an object of subclass is instantiated.
+================================================================================================
+
+What is the difference between a constructor and a method?
+The important difference between constructors and methods are:
+
+Constructors create and initialize objects that don't exist yet, while methods perform operations on objects that already exist.
+
+Constructors can't be called directly; they are called implicitly when the new keyword creates an object. Methods can be called directly on an object that has already been created with new keyword.
+
+Constructors must be named with the same name as the class name. They can't return anything, even void (the object itself is the implicit return). Methods must be declared to return something, although it can be void.
+==========================================================================================
+What will be the output of the program?
+
+public class ObjComp 
+{
+    public static void main(String [] args ) 
+    {
+        int result = 0;
+        ObjComp oc = new ObjComp();
+        Object o = oc;
+
+        if (o == oc)  
+            result = 1;
+        if (o != oc)  
+            result = result + 10;
+        if (o.equals(oc) )  
+            result = result + 100;
+        if (oc.equals(o) )  
+            result = result + 1000;
+
+        System.out.println("result = " + result);
+    }
+}
+
+
+1
+10
+101
+1101<---------------ANS
+===============================================================
+What will be the output of the program?
+
+class A 
+{
+    final public int GetResult(int a, int b) { return 0; } 
+} 
+class B extends A 
+{ 
+    public int GetResult(int a, int b) {return 1; } 
+} 
+public class Test 
+{
+    public static void main(String args[]) 
+    { 
+        B b = new B(); 
+        System.out.println("x = " + b.GetResult(0, 1));  
+    } 
+}
+
+
+x = 0
+x = 1
+Ans: Compilation fails.
+An exception is thrown at runtime.
+==================================================================
+5.
+What is the difference between an Interface and an Abstract class?
+An abstract class can have instance methods that implement a default behavior. An Interface can only declare constants and instance methods, but cannot implement default behavior and all methods are implicitly abstract.
+
+An interface has all public members and no implementation. An abstract class is a class which may have the usual flavors of class members (private, protected, etc.), but has some abstract methods.
+
+===============================================================
+What will be the output of the program?
+public class Test 
+{  
+    public static void main(String args[])
+    { 
+        class Foo 
+        {
+            public int i = 3;
+        } 
+        Object o = (Object)new Foo();
+        Foo foo = (Foo)o;
+        System.out.println("i = " + foo.i);
+    }
+}
+
+
+a) i = 3
+b) Compilation fails.
+c) i = 5
+d) A ClassCastException will occur.
+===============================================================
+
+What will be the output of the program?
+public class A
+{ 
+    void A() /* Line 3 */
+    {
+        System.out.println("Class A"); 
+    } 
+    public static void main(String[] args) 
+    { 
+        new A(); 
+    } 
+}
+
+
+a) Class A
+b) Compilation fails.
+c) An exception is thrown at line 3.
+d) The code executes with no output.
+===============================================================
+
+What will be the output of the program?
+class Super
+{ 
+    public int i = 0; 
+
+    public Super(String text) /* Line 4 */
+    {
+        i = 1; 
+    } 
+} 
+
+class Sub extends Super
+{
+    public Sub(String text)
+    {
+        i = 2; 
+    } 
+
+    public static void main(String args[])
+    {
+        Sub sub = new Sub("Hello"); 
+        System.out.println(sub.i); 
+    } 
+}
+
+
+
+a) 0
+b) 1
+c) 2
+d) Compilation fails.
+
+ans : d
+============================================================
+
+What will be the output of the program?
+public class Test 
+{
+    public int aMethod()
+    {
+        static int i = 0;
+        i++;
+        return i;
+    }
+    public static void main(String args[])
+    {
+        Test test = new Test();
+        test.aMethod();
+        int j = test.aMethod();
+        System.out.println(j);
+    }
+}
+
+
+a) 0
+b) 1
+c) 2
+d) Compilation fails.
+
+
+Compilation fails.
+Answer: Option d
+Explanation:
+Compilation failed because static was an illegal start of expression - method variables do not have a modifier (they are always considered local).
+
+=================================================================
+
+
+interface DoMath 
+{
+    double getArea(int rad); 
+}
+interface MathPlus 
+{
+    double getVol(int b, int h); 
+}
+/* Missing Statements ? */
+
+which two code fragments inserted at end of the program, will allow to compile?
+1) class AllMath extends DoMath { double getArea(int r); }
+2) interface AllMath implements MathPlus { double getVol(int x, int y); }
+3) interface AllMath extends DoMath { float getAvg(int h, int l); }
+4) class AllMath implements MathPlus { double getArea(int rad); }
+5) abstract class AllMath implements DoMath, MathPlus { public double getArea(int rad) { return rad * rad * 3.14; } }
+1 only
+2 only
+3 and 5
+1 and 4
+Answer: Option
+Explanation:
+(3) are (5) are correct because interfaces and abstract classes do not need to fully implement the interfaces they extend or implement (respectively).
+
+(1) is incorrect because a class cannot extend an interface. (2) is incorrect because an interface cannot implement anything. (4) is incorrect because the method being implemented is from the wrong interface.
+===========================================================
+package testpkg.p1;
+public class ParentUtil 
+{
+    public int x = 420;
+    protected int doStuff() { return x; }
+}
+
+package testpkg.p2;
+import testpkg.p1.ParentUtil;
+public class ChildUtil extends ParentUtil 
+{
+    public static void main(String [] args) 
+    {
+        new ChildUtil().callStuff();
+    }
+    void callStuff() 
+    {
+        System.out.print("this " + this.doStuff() ); /* Line 18 */
+        ParentUtil p = new ParentUtil();
+        System.out.print(" parent " + p.doStuff() ); /* Line 20 */
+    }
+}
+which statement is true with respect to the above code?
+a) The code compiles and runs, with output this 420 parent 420.
+b) If line 18 is removed, the code will compile and run.
+c) If line 20 is removed, the code will compile and run.
+d) An exception is thrown at runtime.
+
+
+Answer: Option
+Explanation:
+The ParentUtil instance p cannot be used to access the doStuff() method. Because doStuff() has protected access, and the ChildUtil class is not in the same package as the ParentUtil class, doStuff() can be accessed only by instances of the ChildUtil class (a subclass of ParentUtil).
+
+Option A, B and D are incorrect because of the access rules described previously.
+================================================================
+What will be the output of the program?
+interface Count 
+{
+    short counter = 0;
+    void countUp();
+}
+public class TestCount implements Count 
+{
+    public static void main(String [] args) 
+    {
+        TestCount t = new TestCount();
+        t.countUp();
+    }
+    public void countUp() 
+    {
+        for (int x = 6; x>counter; x--, ++counter) /* Line 14 */
+        {
+            System.out.print(" " + counter);
+        }
+    }
+}
+a) 0 1 2
+b) 1 2 3
+c) 0 1 2 3
+d) 1 2 3 4
+e) Compilation fails
+Answer: Option e
+Explanation:
+The code will not compile because the variable counter is an interface variable that is by default final static. The compiler will complain at line 14 when the code attempts to increment counter.
+===============================================================================
+interface Base 
+{
+    boolean m1 ();
+    byte m2(short s);
+}
+which two code fragments will compile?
+1) interface Base2 implements Base {}
+2) abstract class Class2 extends Base
+{ public boolean m1(){ return true; }}
+3) abstract class Class2 implements Base {}
+4) abstract class Class2 implements Base
+{ public boolean m1(){ return (7 > 4); }}
+5) abstract class Class2 implements Base
+{ protected boolean m1(){ return (5 > 7) }}
+a) 1 and 2
+b) 2 and 3
+c) 3 and 4
+d) 1 and 5
+Answer: Option c
+Explanation:
+(3) is correct because an abstract class doesn't have to implement any or all of its interface's methods. (4) is correct because the method is correctly implemented ((7 > 4) is a boolean).
+
+(1) is incorrect because interfaces don't implement anything. (2) is incorrect because classes don't extend interfaces. (5) is incorrect because interface methods are implicitly public, so the methods being implemented must be public.
+===========================================================================
+public class Outer 
+{ 
+    public void someOuterMethod() 
+    {
+        //Line 5 
+    } 
+    public class Inner { } 
+    
+    public static void main(String[] argv) 
+    {
+        Outer ot = new Outer(); 
+        //Line 10
+    } 
+} 
+Which of the following code fragments inserted, will allow to compile?
+
+a) new Inner(); //At line 5
+b) new Inner(); //At line 10
+c) new ot.Inner(); //At line 10
+d) new Outer.Inner(); //At line 10
+Answer: Option a
+Explanation:
+Option A compiles without problem.
+
+Option B gives error - non-static variable cannot be referenced from a static context.
+
+Option C package ot does not exist.
+
+Option D gives error - non-static variable cannot be referenced from a static context.
+=======================================================================================
+==============================COLLECTIONS==============================================
+https://www.digitalocean.com/community/tutorials/java-collections-interview-questions-and-answers
+https://www.geeksforgeeks.org/java-collections-interview-questions/
+https://www.interviewbit.com/java-collections-interview-questions/
+https://www.javatpoint.com/java-collections-interview-questions
+
+Which of the following are true statements?
+1) The Iterator interface declares only three methods: hasNext, next and remove.
+2) The ListIterator interface extends both the List and Iterator interfaces.
+3) The ListIterator interface provides forward and backward iteration capabilities.
+4) The ListIterator interface provides the ability to modify the List during iteration.
+5) The ListIterator interface provides the ability to determine its position in the List.
+a) 2, 3, 4 and 5
+b) 1, 3, 4 and 5
+c) 3, 4 and 5
+d) 1, 2 and 3
+Answer: Option b
+Explanation:
+The ListIterator interface extends the Iterator interface and declares 
+additional methods to provide forward and backward iteration capabilities, 
+List modification capabilities, and the ability to determine the position of the iterator in the List.
+------------------
+Which statement is true for the class java.util.ArrayList?
+a) The elements in the collection are ordered.
+b) The collection is guaranteed to be immutable.
+c) The elements in the collection are guaranteed to be unique.
+d) The elements in the collection are accessed using a unique key.
+Answer: Option a
+Explanation:
+Yes, always the elements in the collection are ordered.
+---------------------------------
+Suppose that you would like to create an instance of a new Map that has an iteration order that is the same as the iteration order of an existing instance of a Map. Which concrete implementation of the Map interface should be used for the new instance?
+a) TreeMap
+b) HashMap
+c) LinkedHashMap
+d) The answer depends on the implementation of the existing instance.
+Answer: Option c
+Explanation:
+The iteration order of a Collection is the order in which an iterator moves 
+through the elements of the Collection. 
+The iteration order of a LinkedHashMap is determined by the order in which elements are inserted.
+
+When a new LinkedHashMap is created by passing a reference to 
+an existing Collection to the constructor of a LinkedHashMap the Collection.
+addAll method will ultimately be invoked.
+
+The addAll method uses an iterator to the existing Collection to iterate 
+through the elements of the existing Collection and add each to the instance of the new LinkedHashMap.
+
+Since the iteration order of the LinkedHashMap is determined by the order of insertion, 
+the iteration order of the new LinkedHashMap must be the same as the interation order of the old Collection.
+--------------------------
+Which collection class allows you to grow or shrink its size and provides indexed access to its elements, but whose methods are not synchronized?
+a) java.util.HashSet
+b) java.util.LinkedHashSet
+c) java.util.List
+d) java.util.ArrayList
+
+Answer: Option d
+Explanation:
+All of the collection classes allow you to grow or shrink the size of your collection. 
+ArrayList provides an index to its elements. 
+The newer collection classes tend not to have synchronized methods. 
+Vector is an older implementation of ArrayList functionality and has synchronized methods; 
+it is slower than ArrayList.
+------------------------------
+You need to store elements in a collection that guarantees that no duplicates are stored and all elements can be accessed in natural order. Which interface provides that capability?
+a) java.util.Map
+b) java.util.Set
+c) java.util.List
+d) java.util.Collection
+Answer: Option b
+Explanation:
+Option B is correct. 
+A set is a collection that contains no duplicate elements. 
+The iterator returns the elements in no particular order (unless this set is an instance of some class 
+that provides a guarantee). A map cannot contain duplicate keys but it may contain duplicate values. 
+List and Collection allow duplicate elements.
+
+Option A is wrong. 
+A map is an object that maps keys to values. 
+A map cannot contain duplicate keys; each key can map to at most one value. 
+The Map interface provides three collection views, 
+which allow a map's contents to be viewed as a set of keys, 
+collection of values, or set of key-value mappings. 
+The order of a map is defined as the order in which 
+the iterators on the map's collection views return their elements. 
+Some map implementations, like the TreeMap class, 
+make specific guarantees as to their order (ascending key order); 
+others, like the HashMap class, do not (does not guarantee that the order will remain constant over time).
+
+Option C is wrong. A list is an ordered collection (also known as a sequence). 
+The user of this interface has precise control over where in the list each element is inserted. 
+The user can access elements by their integer index (position in the list) 
+and search for elements in the list. Unlike sets, lists typically allow duplicate elements.
+
+Option D is wrong. A collection is also known as a sequence. 
+The user of this interface has precise control over where in the list each element is inserted. 
+The user can access elements by their integer index (position in the list) 
+and search for elements in the list. Unlike sets, lists typically allow duplicate elements.
+----------------------------
+Which interface does java.util.Hashtable implement?
+a) Java.util.Map
+b) Java.util.List
+c) Java.util.HashTable
+d) Java.util.Collection
+Answer: Option a
+Explanation:
+Hash table based implementation of the Map interface.
+
+-------------------
+Which collection class allows you to associate its elements with key values, 
+and allows you to retrieve objects in FIFO (first-in, first-out) sequence?
+a) java.util.ArrayList
+b) java.util.LinkedHashMap
+c) java.util.HashMap
+d) java.util.TreeMap
+Answer: Option b
+Explanation:
+LinkedHashMap is the collection class used for caching purposes. 
+FIFO is another way to indicate caching behavior. 
+To retrieve LinkedHashMap elements in cached order, use the values() method and iterate over the resultant collection.
+
+---------------------
+
+Which collection class allows you to access its elements by associating a key with an element's value 
+and provides synchronization?
+
+a) java.util.SortedMap
+b) java.util.TreeMap
+c) java.util.TreeSet
+d) java.util.Hashtable
+
+Answer: Option d
+
+Explanation:
+Hashtable is the only class listed that provides synchronized methods. 
+If you need synchronization great; otherwise, use HashMap, it's faster.
+---------------------
+Q 9
+Which statement is true for the class java.util.HashSet?
+
+
+a) The elements in the collection are ordered.
+b) The collection is guaranteed to be immutable.
+c) The elements in the collection are guaranteed to be unique.
+d) The elements in the collection are accessed using a unique key.
+Answer: Option c
+Explanation:
+Option C is correct. HashSet implements the Set interface and the Set interface specifies 
+collection that contains no duplicate elements.
+Option A is wrong. HashSet makes no guarantees as to the iteration order of the set; 
+in particular, it does not guarantee that the order will remain constant over time.
+Option B is wrong. The set can be modified.
+Option D is wrong. This is a Set and not a Map.
+
+------------------------------
+How can you make an ArrayList read-only in Java?
+
+package com.gl.glca;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListReadOnly {
+
+	public static void main(String[] args) throws Exception{
+		// TODO Auto-generated method stub
+		  try {
+			  
+	           // creating object of ArrayList<String>
+	           List<String> sample_list = new ArrayList<String>();
+	 
+	           sample_list.add("practice");
+	           sample_list.add("solve");
+	           sample_list.add("interview");
+	 
+	           // displaying the initial list
+	           System.out.println("The initial list is : "
+	                              + sample_list);
+	 
+	           // using unmodifiableList() method
+	           List<String>
+	               read_only_list = Collections
+	                                   .unmodifiableList(sample_list);
+	 
+	           // displaying the read-only list
+	           System.out.println("The ReadOnly ArrayList is : "
+	                              + read_only_list);
+	 
+	           // Trying to add an element to the read-only list
+	           System.out.println("Trying to modify the ReadOnly ArrayList.");                       
+	           read_only_list.add("job");
+	       }
+	 
+	       catch (UnsupportedOperationException e) {
+	           System.out.println("The exception thrown is : " + e);
+	       }
+
+	}
+
+}
+-------------------
+Write a program to convert a given array into a Collection.
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ArrayToCollectionClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		  //creating a sample array
+	       String sample_array[] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+	       
+	       int length_array = sample_array.length;
+	       System.out.println("The input elements are as follows : ");
+	       for(int i = 0; i < length_array; i ++)
+	       {
+	           System.out.print(sample_array[i] + " ");
+	       }
+	       System.out.println();// setting the print cursor to the next line
+	   
+	       List converted_list = Arrays.asList(sample_array);// converting the array to a list
+	       
+	       // print converted elements
+	       System.out.println("The converted list is as follows : "+ converted_list);
+
+	}
+
+}
+---------------------------
+Write a program in Java to display the contents of a HashTable using enumeration.
+
+package com.gl.glca;
+
+import java.util.Enumeration;
+import java.util.Hashtable;
+
+public class HashTableSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		   Hashtable hash_table = new Hashtable();//creating a hash table
+		     hash_table.put("1", "Monday");
+		     hash_table.put("2", "Tuesday");
+		     hash_table.put("3", "Wednesday");
+		     hash_table.put("4", "Thursday");
+		     hash_table.put("5", "Friday");
+		     hash_table.put("6", "Saturday");
+		     hash_table.put("7", "Sunday");
+		     Enumeration enumeration_hash_table = hash_table.elements();//creating an enumeration object
+		     
+		     //while loop runs until the hashtable has more entries in it
+		     while(enumeration_hash_table.hasMoreElements()) {
+		        System.out.println(enumeration_hash_table.nextElement());
+		     }
+	}
+
+}
+-----------------------------
+ Write a program in java to join two arraylists into one arraylist.
+
+package com.gl.glca;
+import java.util.ArrayList;
+public class ArrayListsJoined {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 ArrayList<String> list_1 = new ArrayList<String>();
+	       list_1.add("Monday");
+	       list_1.add("Tuesday");
+	       list_1.add("Wednesday");
+	       list_1.add("Thursday");
+	       //printing the first array list
+	       System.out.println("The elements of the first array list is as follows : " + list_1);
+	       //creating the second array list
+	       ArrayList<String> list_2 = new ArrayList<String>();
+	       list_2.add("Friday");
+	       list_2.add("Saturday");
+	       list_2.add("Sunday");
+	       //printing the second array list
+	       System.out.println("The elements of the second array list is as follows : " + list_2);
+	        
+	       //creating the third array list
+	       ArrayList<String> joined_list = new ArrayList<String>();
+	       joined_list.addAll(list_1);//adding the elements of the first array list
+	       joined_list.addAll(list_2);//adding the elements of the second array list
+	       
+	       System.out.println("The elements of the joined array list is as follows : " + joined_list);
+	       
+
+	}
+
+}
+======================================================
+GENERICS
+Write a Java program to create a generic method that takes two arrays of the same type and checks if they have the same elements in the same order.
+
+package com.gl.colls2;
+
+import java.util.Arrays;
+
+public class GenericArrayComparisonMethod {
+
+	 public static < T > boolean compare_Arrays(T[] array1, T[] array2) {
+		    if (array1.length != array2.length) {
+		      return false;
+		    }
+
+		    for (int i = 0; i < array1.length; i++) {
+		      if (!array1[i].equals(array2[i])) {
+		        return false;
+		      }
+		    }
+		    return true;
+		  }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Integer[] arr1 = {
+			      1,
+			      2,
+			      3,
+			      4
+			    };
+			    Integer[] arr2 = {
+			      1,
+			      2,
+			      4,
+			      4
+			    };
+			    Integer[] arr3 = {
+			      1,
+			      2,
+			      3,
+			      4
+			    };
+			    String[] arr4 = {
+			      "Java",
+			      "World"
+			    };
+			    String[] arr5 = {
+			      "JavaScript",
+			      "World"
+			    };
+			    String[] arr6 = {
+			      "Java",
+			      "World"
+			    };
+			    System.out.println("Original arrays:");
+			    System.out.println("arr1: " + Arrays.toString(arr1));
+			    System.out.println("arr2: " + Arrays.toString(arr2));
+			    System.out.println("arr3: " + Arrays.toString(arr3));
+			    System.out.println("arr4: " + Arrays.toString(arr4));
+			    System.out.println("arr5: " + Arrays.toString(arr5));
+			    System.out.println("arr6: " + Arrays.toString(arr6));
+			    System.out.println("\nCompare arr1 and arr2: " + compare_Arrays(arr1, arr2)); //false
+			    System.out.println("Compare arr1 and arr3: " + compare_Arrays(arr1, arr3)); //true
+			    System.out.println("Compare arr4 and arr5: " + compare_Arrays(arr4, arr5)); //false
+			    System.out.println("Compare arr4 and arr6: " + compare_Arrays(arr4, arr6)); //true     		
+			  
+
+	}
+
+}
+==============================================
+Write a Java program to create a generic method that takes a list of numbers and returns the sum of all the even and odd numbers.
+
+package com.gl.colls2;
+
+import java.util.List;
+
+public class GenericForEvenOddNoSumCalculator {
+
+	public static < T extends Number > void calculateNumberSum(List < T > numbers) {
+	    double evenSum = 0;
+	    double oddSum = 0;
+
+	    for (T number: numbers) {
+	      if (number.doubleValue() % 2 == 0) {
+	        evenSum += number.doubleValue();
+	      } else {
+	        oddSum += number.doubleValue();
+	      }
+	    }
+	    System.out.println("\nOriginal list of numbers: " + numbers);
+	    System.out.println("Sum of even numbers: " + evenSum);
+	    System.out.println("Sum of odd numbers: " + oddSum);
+	  }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List < Integer > integers = List.of(1, 2, 3, 4, 5, 6, 7);
+	    List < Double > doubles = List.of(2.0, 1.5, 4.5, 2.5, 1.5);
+
+	    calculateNumberSum(integers);
+	    calculateNumberSum(doubles);
+
+	}
+
+}
+
+==========================
+Write a Java program to create a generic method that takes a list of numbers and returns the sum of all the even and odd numbers.
+
+package com.gl.colls2;
+
+import java.util.List;
+
+public class GenericElementFinder {
+
+	public static < T > int findIndexOfElement(List < T > list, T target) {
+	    for (int i = 0; i < list.size(); i++) {
+	      if (list.get(i).equals(target)) {
+	        return i;
+	      }
+	    }
+
+	    return -1;
+	  }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List < Integer > numbers = List.of(1, 2, 3, 4, 5);
+	    List < String > colors = List.of("Red", "Green", "Blue", "Orange", "White");
+	    System.out.println("Original list elements:");
+	    System.out.println("Nums: " + numbers);
+	    System.out.println("Colors: " + colors);
+
+	    int index1 = findIndexOfElement(numbers, 3);
+	    System.out.println("\nIndex of 3 in numbers: " + index1); // Output: 2
+
+	    int index2 = findIndexOfElement(numbers, 6);
+	    System.out.println("Index of 6 in numbers: " + index2); // Output: -1
+
+	    int index3 = findIndexOfElement(colors, "Green");
+	    System.out.println("Index of \"Green\" in colors: " + index3); // Output: 1
+
+	    int index4 = findIndexOfElement(colors, "Black");
+	    System.out.println("Index of \"Black\" in colors: " + index4); // Output: -1
+	  
+
+	}
+
+}
+==============================
+Write a Java program to create a generic method that takes a list of any type and a predicate. 
+It returns an array list containing only elements that satisfy the predicate.
+
+package com.gl.colls2;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class GenericWithPredicate {
+
+	public static < T > List < T > filterList(List < T > originalList, Predicate < T > predicate) {
+	    List < T > filteredList = new ArrayList < > ();
+
+	    for (T element: originalList) {
+	      if (predicate.test(element)) {
+	        filteredList.add(element);
+	      }
+	    }
+
+	    return filteredList;
+	  }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List < Integer > numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+	    System.out.println("Original list of numbers: " + numbers);
+	    // Filter even numbers
+	    List < Integer > evenNumbers = filterList(numbers, n -> n % 2 == 0);
+	    System.out.println("Even numbers: " + evenNumbers);
+
+	    // Filter odd numbers
+	    List < Integer > oddNumbers = filterList(numbers, n -> n % 2 != 0);
+	    System.out.println("Odd numbers: " + oddNumbers);
+
+	    List < String > colors = List.of("Red", "Green", "White", "Orange", "Black", "Pink");
+	    System.out.println("\nOriginal list of Colors: " + colors);
+	    // Filter colors starting with 'O'
+	    List < String > wordsStartingWithO = filterList(colors, color -> color.startsWith("O"));
+	    System.out.println("Colors starting with 'O': " + wordsStartingWithO);
+
+	    // Filter colors with length greater than 4
+	    List < String > wordsLengthGreaterThan4 = filterList(colors, color -> color.length() > 4);
+	    System.out.println("Colors with length greater than 4: " + wordsLengthGreaterThan4);
+	  
+
+	}
+
+}
+==================
+Write a Java program to iterate through all elements in a hash Set.
+
+package com.gl.colls2;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class HashSetSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	     // Create a empty hash set
+	     HashSet<String> h_set = new HashSet<String>();
+	   // use add() method to add values in the hash set
+	          h_set.add("India");
+	          h_set.add("United States Of America");
+	          h_set.add("England");
+	          h_set.add("Pakistan");
+	          h_set.add("Nepal");
+	          h_set.add("Australia");
+
+	  // set Iterator 
+	    Iterator<String> p = h_set.iterator();
+	  // Iterate the hash set
+	   while (p.hasNext()) {
+	   System.out.println(p.next());
+	   }
+
+	}
+
+}
+====================================
+Write a Java program to get the number of elements in a hash set.
+
+package com.gl.colls2;
+
+import java.util.HashSet;
+
+public class HashSetSize {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashSet<String> h_set = new HashSet<String>();
+		   // use add() method to add values in the hash set
+		          h_set.add("Karnataka");
+		          h_set.add("TamilNadu");
+		          h_set.add("Andhra Pradesh");
+		          h_set.add("Uttar Pradesh");
+		          h_set.add("Rajasthan");
+		          h_set.add("Madhya Pradesh");
+		    System.out.println("Original Hash Set: " + h_set);
+		    System.out.println("Size of the Hash Set: " + h_set.size());
+
+	}
+
+}
+=================================
+Write a Java program to test if a hash set is empty or not.
+
+package com.gl.colls2;
+
+import java.util.HashSet;
+
+public class HashSetIsEmpty {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	     // Create a empty hash set
+	     HashSet<String> h_set = new HashSet();
+	   // use add() method to add values in the hash set
+	          h_set.add("Bangalore");
+	          h_set.add("New Delhi");
+	          h_set.add("Chennai");
+	          h_set.add("Hubli");
+	          h_set.add("Kanpur");
+	          h_set.add("Nagpur");
+	    System.out.println("Original Hash Set: " + h_set);
+	    System.out.println("Checking the above array list is empty or not! "+h_set.isEmpty());
+	    System.out.println("Remove all the elements from a Hash Set: ");
+	    h_set.removeAll(h_set);
+	    System.out.println("Hash Set after removing all the elements "+h_set);   
+	   
+
+	}
+
+}
+====================
+Write a Java program to compare two sets and retain elements that are the same.
+
+package com.gl.colls2;
+
+import java.util.HashSet;
+
+public class HashSetComparison {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create a empty hash set
+        HashSet<String> h_set1 = new HashSet<String>();
+     // use add() method to add values in the hash set
+          h_set1.add("Red");
+          h_set1.add("Green");
+          h_set1.add("Black");
+          h_set1.add("White");
+          System.out.println("First HashSet content: "+h_set1);
+          HashSet<String>h_set2 = new HashSet<String>();
+          h_set2.add("Red");
+          h_set2.add("Pink");
+          h_set2.add("Black");
+          h_set2.add("Orange");
+          System.out.println("Second HashSet content: "+h_set2);
+          h_set1.retainAll(h_set2);
+          System.out.println("HashSet content:- Balance After Comparison ");
+          System.out.println(h_set1);
+
+	}
+
+}
+
+===================
+Write a Java program to create a tree set, add some Cities (strings) and print out the tree set and check the Order.
+Also Iterate using for Each Loop & Iterator
+Also Reverse the Order of The Cities and display the same
+
+package com.gl.colls2;
+
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class TreeSetSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TreeSet<String> tree_set = new TreeSet<String>();
+		  tree_set.add("Bangalore");
+		  tree_set.add("Dharwad");
+		  tree_set.add("Coimbatore");
+		  tree_set.add("Ernakulam");
+		  tree_set.add("Faridabad");
+		  tree_set.add("Guwahati");
+		  tree_set.add("Ahmedabad");
+		  System.out.println("Tree set: ");
+		  System.out.println(tree_set);
+		  System.out.println("---------Iterate TreeSet Through Iterator---------");
+		  for (String element : tree_set) {
+			    System.out.println(element);
+			    }
+		  System.out.println("Iterate TreeSet using Iterator");
+		  Iterator <String> tSetIter = tree_set.iterator();
+		  while(tSetIter.hasNext())
+		  {
+			  String city = tSetIter.next();
+			  System.out.println(city);
+		  }
+		  
+		  	System.out.println("-----------Original tree set:----------" + tree_set);  
+		     Iterator it = tree_set.descendingIterator();
+		     // Print list elements in reverse order
+		     System.out.println("----------Elements in Reverse Order:-----------");
+		     while (it.hasNext()) {
+		        System.out.println(it.next());
+		     }
+
+	}
+
+}
+-====================================
+Write a Java program to create a reverse order view of the elements contained in a given tree set.(INCLUDED SOLN IN ABOVE SOLUTION
+=============================
+Write a Java program to find numbers less than 7 in a tree set, from a set of numbers 1 to 10 
+
+package com.gl.colls2;
+
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class TreeSetHeadSetSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 // creating TreeSet 
+		   TreeSet <Integer>tree_num = new TreeSet<Integer>();
+		   TreeSet <Integer>treeheadset = new TreeSet<Integer>();
+		     
+		   // Add numbers in the tree
+		   tree_num.add(1);
+		   tree_num.add(2);
+		   tree_num.add(3);
+		   tree_num.add(5);
+		   tree_num.add(6);
+		   tree_num.add(7);
+		   tree_num.add(8);
+		   tree_num.add(9);
+		   tree_num.add(10);
+		     
+		   // Find numbers less than 7
+		 treeheadset = (TreeSet)tree_num.headSet(7);  
+
+		   // create an iterator
+		   Iterator iterator;
+		   iterator = treeheadset.iterator();
+		     
+		   //Displaying the tree set data
+		   System.out.println("Tree set data: ");     
+		   while (iterator.hasNext()){
+		   System.out.println(iterator.next() + " ");
+		   }
+
+	}
+
+}
+==================================
+Write a Java program to get the element in a tree set which is greater than or equal to the given element, using ceiling function
+and also  less than or equal to the given element.
+along with the number which has a lower value than the given element.
+package com.gl.colls2;
+
+import java.util.TreeSet;
+
+public class TreeSetCeiling {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// creating TreeSet 
+		   TreeSet <Integer>tree_num = new TreeSet<Integer>();
+		   TreeSet <Integer>treeheadset = new TreeSet<Integer>();
+		     
+		   // Add numbers in the tree
+		   tree_num.add(10);
+		   tree_num.add(22);
+		   tree_num.add(36);
+		   tree_num.add(25);
+		   tree_num.add(16);
+		   tree_num.add(70);
+		   tree_num.add(82);
+		   tree_num.add(89);
+		   tree_num.add(14);
+		   
+		   System.out.println("Greater than or equal to 86 : "+tree_num.ceiling(86));
+		   System.out.println("Greater than or equal to 29 : "+tree_num.ceiling(29));
+
+		    System.out.println("Less than or equal to 86 : "+tree_num.floor(86));
+		   System.out.println("Less than or equal to 29 : "+tree_num.floor(29));
+
+	}
+
+}
+
+=================
+Write a Java program to remove a given element from a tree set, remove the First Element & Last Element from a TreeSet
+
+package com.gl.colls2;
+
+import java.util.TreeSet;
+
+public class TreeSetElementRemoval {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		// creating TreeSet 
+		   TreeSet <Integer>tree_num = new TreeSet<Integer>();
+		   TreeSet <Integer>treeheadset = new TreeSet<Integer>();
+		     
+		   // Add numbers in the tree
+		   tree_num.add(10);
+		   tree_num.add(22);
+		   tree_num.add(36);
+		   tree_num.add(25);
+		   
+		   tree_num.add(16);
+		   tree_num.add(70);
+		   tree_num.add(82);
+		   tree_num.add(89);
+		   tree_num.add(14);
+		   System.out.println("Original tree set: "+tree_num);
+		   System.out.println("Removes 70 from the list: "+tree_num.remove(70));
+		   System.out.println("Tree set after removing last element: "+tree_num);
+		   
+		   System.out.println("Original tree set: "+tree_num);
+		   System.out.println("Removes the last element: "+tree_num.pollLast());
+		   System.out.println("Tree set after removing last element: "+tree_num);
+		   
+		   System.out.println("Original tree set: "+tree_num);
+		   System.out.println("Removes the first(lowest) element: "+tree_num.pollFirst());
+		   System.out.println("Tree set after removing first element: "+tree_num);
+
+	}
+
+}
+=================================
+Write a Java program to associate the specified value with the specified key in a HashMap
+and also retrive the content by using entrySet & KeySet 
+
+package com.gl.colls2;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class HashMapSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 HashMap<Integer,String> hash_map= new HashMap<Integer,String>();  
+		  hash_map.put(1, "Red");
+		  hash_map.put(2, "Green");
+		  hash_map.put(3, "Black");
+		  hash_map.put(4, "White");
+		  hash_map.put(5, "Blue");
+		  System.out.println("--------------Fetching Using EntrySet---------------");
+		  for(Map.Entry x:hash_map.entrySet()){  
+		   System.out.println(x.getKey()+" "+x.getValue());  
+		  }  
+		  
+		  System.out.println("--------------Fetching Using KeySet---------------");
+		  Set <Integer> myKeySet  = hash_map.keySet();
+		  Iterator <Integer> keyIter = myKeySet.iterator();
+		  while(keyIter.hasNext())
+		  {
+			  Integer ikey = keyIter.next();
+			  System.out.println("The Value for the Key "+ikey+" Is "+hash_map.get(ikey));
+		  }
+		  
+
+	}
+
+}
+
+====================================
+Write a Java program to count the number of key-value (size) mappings in a map and perform the following tasks.
+a) Check if the HashMap is empty or Not using apt function
+b) Check if a map contains a mapping for the specified key.
+c) Fetch Only values of the Map
+
+
+package com.gl.colls2;
+
+import java.util.HashMap;
+
+public class HashMapUtilities {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMap<Integer,String> hash_map= new HashMap<Integer,String>();  
+		  hash_map.put(1, "Red");
+		  hash_map.put(2, "Green");
+		  hash_map.put(3, "Black");
+		  hash_map.put(4, "White");
+		  hash_map.put(5, "Blue");
+		  System.out.println("Size of the hash map: "+hash_map.size());
+		  //-------------------CHECKING FOR KEY AVAILABILITY------------
+		  System.out.println("----------------------CHECKING FOR KEY AVLBLTY-----------------");
+		  HashMap < String, Integer > hash_map1 = new HashMap < String, Integer > ();
+		  hash_map1.put("Red", 1);
+		  hash_map1.put("Green", 2);
+		  hash_map1.put("Black", 3);
+		  hash_map1.put("White", 4);
+		  hash_map1.put("Blue", 5);
+		  // print the map
+		  System.out.println("The Original map: " + hash_map1);
+		  System.out.println("1. Is key 'Green' exists?");
+		  if (hash_map1.containsKey("Green")) {
+		   //key exists
+		   System.out.println("yes! - " + hash_map1.get("Green"));
+		  } else {
+		   //key does not exists
+		   System.out.println("no!");
+		  }
+
+		  System.out.println("\n2. Is key 'orange' exists?");
+		  if (hash_map1.containsKey("orange")) {
+		   System.out.println("yes! - " + hash_map1.get("orange"));
+		  } else {
+		   System.out.println("no!");
+		  }
+		  
+		  //------------------CHECKING FOR EMPTINESS
+		  System.out.println("----------------------CHECKING FOR MAP EMPTINESS-----------------");
+		  // check if map is empty
+		  boolean result = hash_map.isEmpty();
+		  // check the result
+		  System.out.println("Is hash map empty: " + result);
+		  // Removing all the elements from the linked map
+		  hash_map.clear();
+		  // check if map is empty
+		  result = hash_map.isEmpty();
+		  // check the result
+		  System.out.println("Is hash map empty: " + result);
+		  
+		  //------------------------Printing the Values------------
+		  System.out.println("--------------Printing Only Values--------------");
+		  System.out.println("Collection view is: "+ hash_map1.values());
+
+	}
+
+}
+=====================================
+Write a Java program to associate the specified value with the specified key in a Tree Map and perform the following
+a) Insert the Keys in a different order and check if the Keys are sorted in TreeMap
+b) copy Tree Map's content to another Tree Map. 
+
+package com.gl.colls2;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class TreeMapSampleUtilities {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create a tree map
+		   TreeMap<Integer,String> tree_map=new TreeMap<Integer,String>();      
+
+		   // Put elements to the map 
+		   tree_map.put(3, "Black");
+		   tree_map.put(1, "Red");
+		   tree_map.put(5, "Blue");
+		   tree_map.put(2, "Green");
+		   tree_map.put(4, "White");
+		 
+		    
+		   for (Map.Entry<Integer,String> entry : tree_map.entrySet())
+		   {
+		    System.out.println(entry.getKey() + "=>" + entry.getValue());
+		   }
+		  
+	
+		//---------------COPYING ONE TREEMAP INTO ANOTHER-------------
+		   // Create a tree map
+		   TreeMap<String,String> tree_map1=new TreeMap<String,String>();      
+		  
+		  // Put elements to the map 
+		  tree_map1.put("C1", "Red");
+		  tree_map1.put("C2", "Green");
+		  tree_map1.put("C3", "Black");
+		  tree_map1.put("C4", "White");
+		  tree_map1.put("C5", "Blue");
+		   System.out.println("Tree Map 1: "+tree_map1);
+		   TreeMap<String,String> tree_map2 = new TreeMap<String,String>();
+		   tree_map2.put("A1", "Orange");
+		   tree_map2.put("A2", "Pink");
+		   System.out.println("Tree Map 2: "+tree_map2);
+		   tree_map1.putAll(tree_map2);
+		   System.out.println("After copying map2 to map1: "+tree_map1); 
+		
+
+}
+}
+=======================
+Write a Java program to perform the following tasks
+a) Check for the existence of a Given key in a Tree Map and fetch.
+b) Check for the existence of a Given value in a Tree Map and fetch.
+c) Fetch greatest key and the least key in a map.
+d) get the portion of a map whose keys range from a given key to another key.
+
+package com.gl.colls2;
+
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+public class TreeMapUtilities2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		// Create a tree map
+		   TreeMap<String,String> tree_map1=new TreeMap<String,String>();      
+		  
+		   		// Put elements to the map 
+		   		tree_map1.put("C1", "Red");
+		   		tree_map1.put("C2", "Green");
+		   		tree_map1.put("C3", "Black");
+		   		tree_map1.put("C4", "White"); 
+		    
+		   		System.out.println(tree_map1);
+		   	  System.out.println("-------------CHECKING FOR KEY 'S EXISTENCE--------------");
+		        if(tree_map1.containsKey("C1")){
+		            System.out.println("The Tree Map contains key C1");
+		        } else {
+		            System.out.println("The Tree Map does not contain key C1");
+		        }
+		        if(tree_map1.containsKey("C5")){
+		            System.out.println("The Tree Map contains key C5");
+		        } else {
+		            System.out.println("The TreeMap does not contain key C5");
+		        }
+		        
+		        System.out.println("-------------CHECKING FOR VALUE 'S EXISTENCE--------------");
+		        if(tree_map1.containsValue("Green")){
+		            System.out.println("The TreeMap contains value Green");
+		        } else {
+		            System.out.println("The TreeMap does not contain value Green");
+		        }
+		        if(tree_map1.containsValue("Pink")){
+		            System.out.println("The TreeMap contains value Pink");
+		        } else {
+		            System.out.println("The TreeMap does not contain value Pink");
+		        }
+		        
+		        System.out.println("-----------------Greatest & Least Key---------------");
+		        System.out.println("Orginal TreeMap content: " + tree_map1);
+		        System.out.println("Greatest key: " + tree_map1.firstEntry());
+		        System.out.println("Least key: " + tree_map1.lastEntry());
+		        
+		        System.out.println("--------------FETCH PORTION OF MAP WITH RANGE OF KEYS-----------");
+		     // Declare tree maps
+		        TreeMap < Integer, String > tree_map = new TreeMap < Integer, String > ();
+		        SortedMap < Integer, String > sub_tree_map = new TreeMap < Integer, String > ();
+
+		        // Put elements to the map 
+		        tree_map.put(10, "Red");
+		        tree_map.put(20, "Green");
+		        tree_map.put(30, "Black");
+		        tree_map.put(40, "White");
+		        tree_map.put(50, "Pink");
+		        System.out.println("Orginal TreeMap content: " + tree_map);
+		        sub_tree_map = tree_map.subMap(20, true, 40, true);
+		        System.out.println("Sub map key-values: " + sub_tree_map);
+		    }
+
+	
+
+}
+===============================================
+1) Create a Java Program to illustrate the use of Comparable to sort the ArrayList of Objects of type ,
+Student with the following fields and implement Comparable to sort various fields of this class one at a time
+	String studentId;
+	String studentName;
+	int score;
+
+2) Create a Java Program to illustrate the use of Comparator to sort the ArrayList of Objects of
+say type Employee with following fields 
+	String empId;
+	String empName;
+	String empCity;
+	int empSalary;
+Create separate Classes IdSorter,NameSorter,CitySorter SalarySorter implementing Comparator interfaces
+and illustrate various sortings that can be defined simultaneously with the help of Comparator, based on choice.
+
+Identify the difference between the Comparator and Comparable implementations
+	
+====================
+NOT USED THESE 2
+Q 2.
+In a School Administration Site, You are asked to create a piece of code involving the storage of every students 5 subjects marks, in such a way that when the student Code is entered the corresponding Marks details are to be retrieved, though this part is to be Database based module, at this juncture , this module is created using Collections  , The Student Id should be sorted by default based on the Collection that is used .
+You are given the option of using the apt Collection from the given list:
+HashSet , HashMap , Hashtable & TreeMap
+Choose the suitable collection and facility should be made to accept the Student Id and Corresponding Marks object to be accepted from the user and stored, also facility should be available in order to get the Students Marks Object for a given Student Id
+Marks Object should have following fields:
+StudentName 
+Grade
+Subj1Score
+Subj2Score
+Subj3Score
+Subj4Score
+Subj5Score
+
+Q3.
+In the Problem No 5 , add a feature where based on a Menu based option, an user should be able to
+View Only Student Ids
+View Only Marks Objects
+View Both StudentId along with Corresponding Marks Objects
+
+========================
+Write a Java recursive method to calculate the factorial of a given positive integer.
+
+package com.gl.dsa;
+
+public class FactorialRecursion {
+	 public static int calculateFactorial(int n) {
+		    // Base case: factorial of 0 is 1
+		    if (n == 0) {
+		      return 1;
+		    }
+
+		    // Recursive case: multiply n with factorial of (n-1)
+		    return n * calculateFactorial(n - 1);
+		  }
+
+		  public static void main(String[] args) {
+		    int number = 7;
+		    int factorial = calculateFactorial(number);
+		    System.out.println("Factorial of " + number + " is: " + factorial);
+		    number = 12;
+		    factorial = calculateFactorial(number);
+		    System.out.println("\nFactorial of " + number + " is: " + factorial);
+		  }
+
+}
+==========================
+Write a Java recursive method to calculate the sum of all numbers from 1 to n.
+
+package com.gl.dsa;
+
+public class SumOfIntRecursion {
+
+	public static int calculateSum(int n) {
+	    // Base case: sum of 0 is 0
+	    if (n == 0) {
+	      return 0;
+	    }
+
+	    // Recursive case: add n with the sum of (n-1)
+	    return n + calculateSum(n - 1);
+	  }
+
+	  public static void main(String[] args) {
+	    int number = 7;
+	    int sum = calculateSum(number);
+	    System.out.println("Sum of numbers from 1 to " + number + " is: " + sum);
+	  }
+
+}
+==========================
+Write a Java recursive method to calculate the nth Fibonacci number.
+
+package com.gl.dsa;
+
+public class FibonacciRecursion {
+
+	public static int calculateFibonacci(int n) {
+	    // Base case: Fibonacci numbers at positions 0 and 1 are 0 and 1, respectively
+	    if (n == 0) {
+	      return 0;
+	    } else if (n == 1) {
+	      return 1;
+	    }
+
+	    // Recursive case: sum of the previous two Fibonacci numbers
+	    return calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
+	  }
+
+	  public static void main(String[] args) {
+	    int position = 0;
+	    int fibonacciNumber = calculateFibonacci(position);
+	    System.out.println("The Fibonacci number at position " + position + " is: " + fibonacciNumber);
+	    position = 3;
+	    fibonacciNumber = calculateFibonacci(position);
+	    System.out.println("\nThe Fibonacci number at position " + position + " is: " + fibonacciNumber);
+	    position = 9;
+	    fibonacciNumber = calculateFibonacci(position);
+	    System.out.println("\nThe Fibonacci number at position " + position + " is: " + fibonacciNumber);
+	  }
+
+}
+=====================
+Write a Java recursive method to check if a given string is a palindrome.
+
+public class PalindromeCheckerRecursion {
+    // Base case: an empty string or a string with one character is a palindrome
+    if (str.length() <= 1) {
+      return true;
+    }
+
+    // Recursive case: check if the first and last characters are equal,
+    // and recursively check if the substring between them is a palindrome
+    char firstChar = str.charAt(0);
+    char lastChar = str.charAt(str.length() - 1);
+
+    if (firstChar != lastChar) {
+      return false;
+    }
+
+    String remainingSubstring = str.substring(1, str.length() - 1);
+    return isPalindrome(remainingSubstring);
+  }
+
+  public static void main(String[] args) {
+    String palindrome1 = "madam";
+    boolean isPalindrome1 = isPalindrome(palindrome1);
+    System.out.println(palindrome1 + " is a palindrome: " + isPalindrome1);
+
+    String palindrome2 = "level";
+    boolean isPalindrome2 = isPalindrome(palindrome2);
+    System.out.println(palindrome2 + " is a palindrome: " + isPalindrome2);
+
+    String notPalindrome = "java";
+    boolean isPalindrome3 = isPalindrome(notPalindrome);
+    System.out.println(notPalindrome + " is a palindrome: " + isPalindrome3);
+  }
+
+===========================================
+Write a Java recursive method to calculate the exponentiation of a number (base) raised to a power (exponent).
+
+package com.gl.dsa;
+
+public class ExponentCalciRecursion {
+	 public static double calculateExponentiation(double base, int exponent) {
+		    // Base case: any number raised to the power of 0 is 1
+		    if (exponent == 0) {
+		      return 1;
+		    }
+
+		    // Recursive case: multiply the base with the exponentiation of (base, exponent-1)
+		    return base * calculateExponentiation(base, exponent - 1);
+		  }
+
+		  public static void main(String[] args) {
+		    double base = 3.5;
+		    int exponent = 4;
+		    double result = calculateExponentiation(base, exponent);
+		    System.out.println(base + " raised to the power of " + exponent + " is: " + result);
+		  }
+
+}
+===========================
+Write a Java recursive method to reverse a given string.
+
+package com.gl.dsa;
+
+public class StringReversalRecursion {
+	public static String reverseString(String str) {
+	    // Base case: if the string is empty or has only one character, it is already reversed
+	    if (str.isEmpty() || str.length() == 1) {
+	      return str;
+	    }
+
+	    // Recursive case: reverse the substring starting from the second character and concatenate the first character
+	    return reverseString(str.substring(1)) + str.charAt(0);
+	  }
+
+	  public static void main(String[] args) {
+	    String input = "Java, World!";
+	    String reversed = reverseString(input);
+	    System.out.println("Original string: " + input);
+	    System.out.println("Reversed string: " + reversed);
+	  }
+
+}
+===================================
+Write a Java recursive method to find the greatest common divisor (GCD) of two numbers.
+
+package com.gl.dsa;
+
+public class GCDCalculatorRecursion {
+
+	 public static int calculateGCD(int num1, int num2) {
+		    // Base case: if the second number is 0, the GCD is the first number
+		    if (num2 == 0) {
+		      return num1;
+		    }
+
+		    // Recursive case: calculate the GCD by recursively calling the method with num2 as the new num1 and the remainder as num2
+		    int remainder = num1 % num2;
+		    return calculateGCD(num2, remainder);
+		  }
+
+		  public static void main(String[] args) {
+		    int number1 = 24;
+		    int number2 = 42;
+		    int gcd = calculateGCD(number1, number2);
+		    System.out.println("The GCD of " + number1 + " and " + number2 + " is: " + gcd);
+		  }
+
+}
+================================
+Write a Java recursive method to count the number of occurrences of a specific element in an array.
+
+package com.gl.dsa;
+
+public class ElementRecurrenceRecursion {
+
+		  public static < T > int countOccurrences(T[] arr, T target) {
+		    return countOccurrences(arr, target, 0);
+		  }
+
+		  private static < T > int countOccurrences(T[] arr, T target, int index) {
+		    // Base case: if the index reaches the end of the array, return 0
+		    if (index == arr.length) {
+		      return 0;
+		    }
+
+		    // Recursive case: check if the element at the current index is equal to the target,
+		    // and recursively call the method with the next index and add 1 if it is equal
+		    int count = countOccurrences(arr, target, index + 1);
+		    if (arr[index].equals(target)) {
+		      count++;
+		    }
+
+		    return count;
+		  }
+
+		  public static void main(String[] args) {
+		    Integer[] numbers = {
+		      10,
+		      20,
+		      30,
+		      40,
+		      20,
+		      50,
+		      20,
+		      60
+		    };
+		    int target = 20;
+		    int occurrences = countOccurrences(numbers, target);
+		    System.out.println("The number of occurrences of " + target + " in the array is: " + occurrences);
+		  }
+	}
+===================================================
+Write a Java recursive method to find the sum of all odd numbers in an array.
+
+package com.gl.dsa;
+
+public class OddNumSumRecursion {
+
+	public static int calculateOddNumberSum(int[] arr) {
+	    return calculateOddNumberSum(arr, 0);
+	  }
+
+	  private static int calculateOddNumberSum(int[] arr, int index) {
+	    // Base case: if the index reaches the end of the array, return 0
+	    if (index == arr.length) {
+	      return 0;
+	    }
+
+	    // Recursive case: check if the element at the current index is odd,
+	    // and recursively call the method with the next index and add the current element if it is odd
+	    int sum = calculateOddNumberSum(arr, index + 1);
+	    if (arr[index] % 2 != 0) {
+	      sum += arr[index];
+	    }
+
+	    return sum;
+	  }
+
+	  public static void main(String[] args) {
+	    int[] numbers = {
+	      1,
+	      2,
+	      3,
+	      4,
+	      5,
+	      6,
+	      7,
+	      8,
+	      9
+	    };
+	    int sum = calculateOddNumberSum(numbers);
+	    System.out.println("The sum of all odd numbers in the array is: " + sum);
+	  }
+
+}
+
+============================
+Write a Java recursive method to find the sum of the digits of a given integer.
+
+package com.gl.dsa;
+
+public class SumOfDigitsRecursion {
+
+	public static int calculateDigitSum(int number) {
+	    // Base case: if the number is a single digit, return the number itself
+	    if (number < 10) {
+	      return number;
+	    }
+
+	    // Recursive case: calculate the sum of the last digit and the digit sum of the remaining number
+	    int lastDigit = number % 10;
+	    int remainingNumber = number / 10;
+
+	    return lastDigit + calculateDigitSum(remainingNumber);
+	  }
+
+	  public static void main(String[] args) {
+	    int number = 123456;
+	    int digitSum = calculateDigitSum(number);
+	    System.out.println("The sum of the digits of " + number + " is: " + digitSum);
+	  }
+
+}
+=================================
+Write a Java recursive method to check if a given array is sorted in ascending order.
+package com.gl.dsa;
+
+import java.util.Arrays;
+
+public class SortCheckRecursion {
+
+	 public static boolean isSorted(int[] arr) {
+		    return isSorted(arr, 0);
+		  }
+
+		  private static boolean isSorted(int[] arr, int index) {
+		    // Base case: if the index reaches the end of the array, 
+		    // the array is sorted
+		    if (index == arr.length - 1) {
+		      return true;
+		    }
+
+		    // Recursive case: check if the element at the current index 
+		    // is greater than the next element,
+		    // and recursively call the method with the next index
+		    if (arr[index] > arr[index + 1]) {
+		      return false;
+		    }
+
+		    return isSorted(arr, index + 1);
+		  }
+
+		  public static void main(String[] args) {
+		    int[] array1 = {
+		      1,
+		      2,
+		      3,
+		      4,
+		      5
+		    };
+		    System.out.println("Original Array: " + Arrays.toString(array1));
+		    boolean sorted1 = isSorted(array1);
+		    System.out.println("Is array1 sorted in ascending order? " + sorted1); // Output: true
+
+		    int[] array2 = {
+		      4,
+		      5,
+		      3,
+		      2,
+		      1
+		    };
+		    System.out.println("Original Array: " + Arrays.toString(array2));
+		    boolean sorted2 = isSorted(array2);
+		    System.out.println("Is array2 sorted in ascending order? " + sorted2); // Output: false
+		  } 
+
+}
+
+=============================
+1)  What is the time, and space complexity of the following code: 
+
+int a = 0, b = 0;
+for (i = 0; i < N; i++) {
+    a = a + Math.random();
+}
+for (j = 0; j < M; j++) {
+    b = b + Math.random();
+}
+
+Options: 
+ 
+
+1) O(N * M) time, O(1) space
+2) O(N + M) time, O(N + M) space
+3) O(N + M) time, O(1) space
+4) O(N * M) time, O(N + M) space
+
+Ans 3
+
+Explanation :
+Explanation: The first loop is O(N) and the second loop is O(M). 
+Since N and M are independent variables, so we can’t say which one is the leading term. Therefore Time complexity of the given problem will be O(N+M).
+Since variables size does not depend on the size of the input, therefore  Space Complexity will be constant or O(1)
+===========================
+What is the time complexity of the following code: 
+
+int a = 0;
+for (i = 0; i < N; i++) {
+    for (j = N; j > i; j--) {
+        a = a + i + j;
+    }
+}
+
+1) O(N)
+2) O(N*log(N))
+3) O(N * Sqrt(N))
+4) O(N*N)
+
+Answer:
+4. O(N*N)
+Explanation: 
+The above code runs total no of times 
+= N + (N – 1) + (N – 2) + … 1 + 0 
+= N * (N + 1) / 2 
+= 1/2 * N^2 + 1/2 * N 
+O(N^2) times.
+
+==============
+What is the time complexity of the following code: 
+
+int i, j, k = 0;
+for (i = n / 2; i <= n; i++) {
+    for (j = 2; j <= n; j = j * 2) {
+        k = k + n / 2;
+    }
+}
+
+Options: 
+ 
+
+1) O(n)
+2) O(N log N)
+3) O(n^2)
+4) O(n^2Logn)
+
+
+Answer 2. O(nLogn)
+
+Explanation: If you notice, j keeps doubling till it is less than or equal to n. Several times, 
+we can double a number till it is less than n would be log(n). 
+Let’s take the examples here. 
+for n = 16, j = 2, 4, 8, 16 
+for n = 32, j = 2, 4, 8, 16, 32 
+So, j would run for O(log n) steps. 
+i runs for n/2 steps. 
+So, total steps = O(n/ 2 * log (n)) = O(n*logn)
+=====================
+What is the time complexity of the following code:
+
+
+int a = 0, i = N;
+while (i > 0) {
+    a += i;
+    i /= 2;
+}
+
+Options: 
+ 
+
+1) O(N)
+2) O(Sqrt(N))
+3) O(N / 2)
+4) O(log N)
+ 
+ Answer 4. O(log N)
+Explanation: We have to find the smallest x such that ‘(N / 2^x )< 1 OR  2^x > N’ 
+x = log(N)
+=======================
+What will be the time complexity of the following code?
+
+int value = 0;
+for(int i=0;i<n;i++)
+    for(int j=0;j<i;j++)
+    value += 1;
+
+1) n
+2) (n+1)
+3) n(n-1)
+4) n(n+1)
+Output:
+
+3. n(n-1)
+Explanation: First for loop will run for (n) times and another for loop will be run for (n-1) times as the inner loop 
+will only run till the range i which is 1 less than n , so overall time will be n(n-1).
+=============================
+Find the element’s first and last positions in a sorted array
+
+
+class Solution {
+    private int extremeInsertionIndex(int[] nums, int target, boolean left) {
+        int lo = 0;
+        int hi = nums.length;
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (nums[mid] > target || (left && target == nums[mid])) {
+                hi = mid;
+            }
+            else {
+                lo = mid+1;
+            }
+        }
+        return lo;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int[] targetRange = {-1, -1};
+        int leftIdx = extremeInsertionIndex(nums, target, true);
+        if (leftIdx == nums.length || nums[leftIdx] != target) {
+            return targetRange;
+        }
+        targetRange[0] = leftIdx;
+        targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
+        return targetRange;
+    }
+}
+------------------------------------------------------------------------------------
+
+Overview
+Counting sort is an integer-based sorting algorithm for sorting an array whose keys lie between a specific range. 
+It counts the total number of elements with each distinct key value and then uses those counts to determine the 
+positions of each key value in the output.
+
+We can use counting sort to find the most frequent letter in a file or sort a limited range array efficiently. 
+It is often used as a subroutine in the radix sorting algorithm, and because of this, counting sort needs to be a stable sort.
+
+Algorithm
+The algorithm loops over the items, computing a histogram of each key’s number of times within the input collection. 
+It then performs a prefix sum computation to determine, for each key, the starting position in the 
+output array of the items having that key. Finally, 
+it loops over the items again, moving each item into its sorted position in the output array.
+
+The algorithm can be implemented as below in C, Java, and Python. In the below code:
+
+After the first for-loop, freq[i] stores the total number of items with a key equal to i.
+After the second for-loop, it instead stores the total number of items with a key less than i, 
+which is the same as the first index at which an item with key i should be stored in the output array.
+Throughout the third loop, freq[i] always stores the next position in the output array 
+into which an item with key i should be stored, 
+so each item is moved to its correct position in the output array.
+
+package com.gl.sorts;
+
+import java.util.Arrays;
+
+public class CountSorterAlgo {
+	
+	 /*
+    `arr` ——> the input integer array to be sorted
+      `k` ——> a number such that all integers are in range `0…k-1`
+   */
+   public static void countsort(int[] arr, int k)
+   {
+       // create an integer array of size `n` to store the sorted array
+       int[] output = new int[arr.length];
+
+       // create an integer array of size `k + 1`, initialized by all zero
+       int[] freq = new int[k + 1];
+
+       // using the value of each item in the input array as an index,
+       // store each integer's count in `freq[]`
+       for (int i: arr) {
+           freq[i]++;
+       }
+
+       // calculate the starting index for each integer
+       int total = 0;
+       for (int i = 0; i < k + 1; i++)
+       {
+           int oldCount = freq[i];
+           freq[i] = total;
+           total += oldCount;
+       }
+
+       // copy to the output array, preserving the order of inputs with equal keys
+       for (int i: arr)
+       {
+           output[freq[i]] = i;
+           freq[i]++;
+       }
+
+       // copy the output array back to the input array
+       Arrays.setAll(arr, i -> output[i]);
+   }
+
+   public static void main(String[] args)
+   {
+       int[] arr = { 4, 2, 10, 10, 1, 4, 2, 1, 10 };
+
+       // range of array elements
+       int k = 10;
+
+       countsort(arr, k);
+       System.out.println(Arrays.toString(arr));
+   }
+
+}
+============================================================
+Find the largest number possible from a given set of numbers
+
+Find the largest number possible from a set of given numbers where the numbers append to each other in any order to form the largest number.
+
+For example,
+
+Input:  { 10, 68, 75, 7, 21, 12 }
+ 
+Output: 77568211210
+Practice This Problem
+
+Simply sorting the array in descending order and considering the sorted order 
+is not possible here as the sorted array {75, 68, 21, 12, 10, 7} will result in the number 75682112107, 
+which is less than the largest number possible 77568211210.
+
+ 
+The idea is to write our custom comparator function for the sorting routine. For two numbers, X and Y, 
+the custom comparator function will not compare X and Y with each other, but it compares XY with YX and the 
+greater number will come first in sorted order. Here, XY denotes a number formed by appending Y to X and 
+YX denotes a number formed by appending X to Y. For example, for X = 15 and Y = 4, XY = 154 and YX = 415.
+
+As evident from the above example, X > Y but XY < YX, so the comparator function will consider Y > X. 
+
+
+package com.gl.sorts;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class HighestPossibleNumber {
+
+	public static String findLargestNumber(List<Integer> nums)
+    {
+        // sort using a custom function object
+        Collections.sort(nums, (a, b) -> (String.valueOf(b) + a).compareTo(String.valueOf(a) + b));
+        return nums.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(""));
+    }
+ 
+    public static void main(String[] args)
+    {
+        List<Integer> numbers = Arrays.asList(10, 68, 97, 9, 21, 12);
+ 
+        String largestNumber = findLargestNumber(numbers);
+        System.out.println("The largest number is " + largestNumber);
+    }
+}
+===============================================DSA================================================================
+Create a Program to illustrate the Populating the elements of an Array and Fetching the elements of an Array.
+package com.gl.dsa;
+
+import java.util.Scanner;
+
+public class ArraySample {
+
+	public static void main(String[] args)
+	{
+		int[] priceOfPen= new int[5];
+		System.out.println("Enter The Prices for 5 Pens..");
+		Scanner in=new Scanner(System.in);
+			for(int i=0;i<priceOfPen.length;i++)
+				priceOfPen[i]=in.nextInt();
+			System.out.println("The Prices are....");
+			for(int j=0;j<priceOfPen.length;j++)
+				System.out.print(priceOfPen[j]+" ");
+}
+
+}
+================================================================================================================
+What is Linked List?
+Linked list data structure helps the required objects to be arranged in a linear order.
+
+Linked List Advantages
+Dynamic in size
+No wastage as capacity and size is always equal
+Easy insertion and deletion as 1 link manipulation is required
+Efficient memory allocation
+Linked List Disadvantages
+If head Node is lost, the linked list is lost
+No random access is possible
+Linked List Applications
+Suitable where memory is limited 
+Suitable for applications that require frequent insertion and deletion
+
+Create a Menu Based  application to Generate a Link List with the following operations
+
+	1. Insert In End
+	2. Insert In Beginning
+	3. Insert At A  Particular Position
+	4. Delete At a Position
+	5. Display Length of the LinkedList
+	6. Reverse
+	7. Display
+
+package com.gl.dsa;
+import java.util.*;
+
+class LLNode{
+
+	int data;
+	LLNode next;
+	
+	LLNode(int data)
+	{
+		this.data=data;
+		this.next=null;
+		
+	}
+}
+
+public class LinkedListOperations {
+	
+	
+	LLNode head;
+	
+	
+	LLNode insertInBeg(int key,LLNode head)
+	{
+		LLNode ttmp=new LLNode(key);
+		
+		if(head==null)
+			head=ttmp;
+		
+		else
+			{
+				ttmp.next=head;
+				head=ttmp;
+			}
+		return head;
+	}
+	
+	
+	LLNode insertInEnd(int key,LLNode head)
+	{
+		LLNode ttmp=new LLNode(key);
+		LLNode ttmp1=head;
+		
+		if(ttmp1==null)
+			head=ttmp;
+		else
+		{
+			while(ttmp1.next!=null)
+					ttmp1=ttmp1.next;
+			ttmp1.next=ttmp;
+			
+		}
+		
+		return head;
+			
+	}
+
+
+	LLNode insertAtPos(int key,int pos,LLNode head)
+	{
+		LLNode ttmp=new LLNode(key);
+		
+		if(pos==1)
+		{
+			ttmp.next=head;
+			head=ttmp;
+		}
+		else
+		{
+			LLNode ttmp1=head;
+			for(int i=1;ttmp1!=null && i<pos;i++)
+				ttmp1=ttmp1.next;
+			ttmp.next=ttmp1.next;
+			ttmp1.next=ttmp;
+		}
+		
+		return head;
+	}
+	
+	
+	LLNode delete(int pos,LLNode head)
+	{
+		LLNode ttmp=head;
+		if(pos==1)
+			head=ttmp.next;
+		else
+		{
+			for(int i=1;ttmp!=null && i<pos-1;i++)
+				ttmp=ttmp.next;
+			ttmp.next=ttmp.next.next;
+		}
+		return head;
+	}
+	
+	int length(LLNode head)
+	{
+		LLNode ttmp=head;
+		int c=0;
+		if(ttmp==null)
+			return 0;
+		else
+		{
+		 while(ttmp!=null)
+			{	ttmp=ttmp.next;
+				c++;
+			}
+		}
+		return c;
+	}
+	
+	
+	LLNode reverse(LLNode head)
+	{
+		LLNode prevLNode=null,curLNode=head,nextLNode=null;
+		while(curLNode!=null)
+		{
+			nextLNode=curLNode.next;
+			curLNode.next=prevLNode;
+			
+			prevLNode=curLNode;
+			curLNode=nextLNode;
+		}
+		
+		head=prevLNode;
+		return head;
+	}
+	
+	
+	void display(LLNode head)
+	{
+		LLNode ttmp=head;
+		while(ttmp!=null)
+			{System.out.print(ttmp.data+" ");
+			 ttmp=ttmp.next;
+			}
+	}
+		
+		public static void main(String[] args)
+		{
+			LinkedListOperations l=new LinkedListOperations();
+			l.head=null;
+			Scanner in=new Scanner(System.in);
+			 do
+		{
+	 System.out.println("\n********* MENU *********");
+		 System.out.println("\n 1.Insert In the End of The LinkedList");
+		 System.out.println("\n 2.Insert In the Beginning of The LinkedList");
+		 System.out.println("\n 3.Insert At A  Particular Pos  key ,position");
+		 System.out.println("\n 4.Delete At a Pos");
+		 System.out.println("\n 5.Length of the LinkedList");
+		 System.out.println("\n 6.Reversed Linked List");
+		 System.out.println("\n 7.Display Elements of the LinkedList");
+		 System.out.println("\n 8.EXIT");
+		 System.out.println("\n Enter Your Choice : ");
+		 int n=in.nextInt();
+		 switch(n)
+			{case 1: System.out.println("\nenter the value ");
+				  l.head=l.insertInEnd(in.nextInt(),l.head);
+				 break;
+			 case 2: System.out.println("\nenter the value");
+				 l.head=l.insertInBeg(in.nextInt(),l.head);
+				 break;
+			 case 3: System.out.println("\nenter the value ");
+				 l.head=l.insertAtPos(in.nextInt(),in.nextInt(),l.head);
+				 break;
+			 case 4: 
+				 l.head=l.delete(in.nextInt(),l.head);
+				 break;
+			 case 5: 
+				System.out.println(l.length(l.head));
+				 break;
+			 case 6: 
+				 l.head=l.reverse(l.head);
+				 break;
+			 case 7: 
+				l.display(l.head);
+			 		 break;
+			 case 8: System.exit(0);
+			 		 break;
+			 default: System.out.println("\n Wrong Choice!");
+			 		  break;
+			}
+		 System.out.println("\n do u want to cont...1 to continue / 0 to exit ");
+		}while(in.nextInt()==1);
+		}
+
+
+}
+----------------------------
+Write a Program to implement Stack with Menu options to perform
+Push,Pop,Peek & check if Stack is Empty?
+
+
+package com.gl.dsa;
+import java.util.*;
+
+class Stack
+{
+   int[] a;
+   int top;
+   Stack()
+   {	
+	a=new int[100];
+	top=-1;
+   }
+  
+  void push(int x)
+  {	
+	if(top==a.length-1)
+	  System.out.println("overflow");
+	else
+	 a[++top]=x;
+   }
+   
+   int pop()
+   {
+     if(top==-1)
+		{System.out.println("underflow");
+	     return -1;
+		}
+	 else
+	   return(a[top--]);
+	}
+	
+	void display()
+	{
+		for(int i=0;i<=top;i++)
+			System.out.print(a[i]+" ");
+		System.out.println();	
+	}
+	
+	boolean isEmpty()
+	{
+		if(top==-1)
+			return true;
+		else 
+			return false;
+	}
+	
+	int peek()
+	{
+		if(top==-1)
+			return -1;
+		return (a[top]);
+	}
+	
+	
+}
+public class MyStack {
+
+	public static void main(String args[])
+	{
+		
+		Stack s=new Stack();
+		Scanner in= new Scanner(System.in);
+		
+		 do
+			{System.out.println("\n******** MENU *******");
+			 System.out.println("\n1.PUSH");
+			 System.out.println("\n2.POP");
+			 System.out.println("\n3.PEEK");
+			 System.out.println("\n4 IS EMPTY");
+			 System.out.println("\n5.EXIT");
+			 System.out.println("\n enter ur choice : ");
+			 switch(in.nextInt())
+				{
+				 case 1: 
+					 System.out.println("\nenter the value ");
+					 s.push(in.nextInt());
+					 break;
+				 case 2: 
+					System.out.println("\n popped element : "+ s.pop());
+					 break;
+				 
+				case 3: 
+					System.out.println("\n top element : "+ s.peek());
+					 break;
+				 case 4: System.out.println("\n is empty : "+ s.isEmpty());
+						 break;
+				 case 5: System.exit(0);
+						 break;
+				 default: System.out.println("\n Wrong Choice!");
+						  break;
+				}
+			 System.out.println("\n do u want to cont... ");
+			}while(in.nextInt()==1);
+
+	}
+	
+}
+---------------------------------------------------------------------------
+Write a program to implement Stack using a LinkedList.
+
+
+import java.util.*;
+
+class LNode
+{
+	 int data;
+	 LNode next;
+	 LNode(int d)
+	 {
+		data=d;
+	 }
+	 
+}
+
+ class Stack
+{
+	 LNode push(int d,LNode head){  
+		
+				LNode tmp1 = new LNode(d);
+				
+				if(head==null)
+				   
+					head=tmp1;
+				
+				else
+				{
+					tmp1.next=head;
+					
+					head=tmp1;
+				}
+				return head;
+			 }
+			 
+			 
+	 LNode pop(LNode head){
+		   
+		    if(head==null)
+		        System.out.println("underflow");
+		   else
+				head=head.next;
+			return head;
+		 }
+	
+
+	void display(LNode head){
+		
+				System.out.println("\n list is : ");
+				if(head==null){
+					
+					System.out.println("no LNodes");
+			
+					return;
+					}
+				 
+				LNode tmp=head;
+
+				while(tmp!=null){
+						
+				System.out.print(tmp.data+" ");
+					 
+				tmp=tmp.next;
+					 
+					
+				}
+	       }
+
+    boolean isEmpty(LNode head)
+	{
+		if(head==null)
+			return true;
+		else
+			return false;
+	}
+	
+	int peek(LNode head)
+	{
+		if(head==null)
+			return -1;
+		return head.data;
+	}
+	
+}
+
+public class StackUsingLinkedList {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Stack s=new Stack();
+		LNode head=null;
+		Scanner in=new Scanner(System.in);
+		
+		 do
+			{System.out.println("\n******** MENU *******");
+			 System.out.println("\n1.PUSH");
+			 System.out.println("\n2.POP");
+			 System.out.println("\n3.PEEK");
+			 System.out.println("\n4 IS EMPTY"); 
+			 System.out.println("\n5 DISPLAY");
+			 System.out.println("\n6.EXIT");
+			 System.out.println("\n enter ur choice : ");
+			 switch(in.nextInt())
+				{
+				 case 1: 
+					 System.out.println("\nenter the value ");
+					 head=s.push(in.nextInt(),head);
+					 break;
+				 case 2: 
+					 head=s.pop(head);
+					 break;
+				 
+				case 3: 
+				System.out.println("\n top element : "+ s.peek(head));
+					 break;
+				 case 4: 
+					 	System.out.println("\n is empty : "+ s.isEmpty(head));
+						 break;
+				 case 5: s.display(head); 
+						 break;
+				 case 6: System.exit(0);
+						 break;
+				 default: System.out.println("\n Wrong Choice!");
+						  break;
+				}
+			 System.out.println("\n do u want to cont... ");
+			}while(in.nextInt()==1);
+
+
+	}
+
+}
+-----------------------------------------------------
+Implement a Queue using an Array.
+
+package com.gl.dsa;
+import java.util.*;
+
+class Queue{
+
+ int front;
+ int rear;
+ int[] arr;
+ 
+ Queue()
+ {
+   front=rear=-1;
+   arr=new int[10];
+  }
+  
+  void enqueue(int a)
+  {
+    if(rear==arr.length-1)
+		System.out.println("overflow");
+	else
+		arr[++rear]=a;
+	
+	if(front==-1)
+		front++;
+   }
+   
+   int dequeue()
+   {
+     int x=-1;
+	 if(front==-1)
+		System.out.println("underflow");
+	 else
+		x=arr[front++];
+	 if(rear==0)
+	     rear--;
+	 return x;
+    }
+	
+	void display()
+	{
+	  for(int i=front;i<=rear;i++)
+		System.out.print(arr[i]+" ");
+
+	 System.out.println();
+
+
+	}
+}
+public class QueueUsingArray {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Queue ob=new Queue();
+		  ob.enqueue(1);
+		  ob.enqueue(2);
+		  ob.enqueue(3);
+		  ob.enqueue(4);
+		  ob.enqueue(5);
+		  ob.display();
+		  ob.dequeue();
+		  ob.display();
+
+	}
+
+}
+--------------------------------------------
+Insertion in a BST – Iterative and Recursive Solution
+Write a Program to perform Insertion in a BST
+
+A Binary Search Tree (BST) is a rooted binary tree, whose nodes each store a key (and optionally, an associated value) and 
+each has two distinguished subtrees, commonly denoted left and right. The tree should satisfy the BST property, 
+which states that each node’s key must be greater than all keys stored in the left subtree and not greater 
+than all keys in the right subtree. Ideally, unique values should be present in the tree.
+
+	  15
+       /     \
+      10     20
+     /  \    / \
+    8   12  16 25
+
+Binary search trees are a fundamental data structure used to construct more abstract data structures such as sets, 
+multisets, and associative arrays (maps, multimaps, etc.).
+
+When looking for a place to insert a new key, traverse the tree from root-to-leaf, 
+making comparisons to keys stored in the tree’s nodes and deciding based on the comparison to continue searching in the left or right subtrees. 
+In other words, we examine the root and recursively insert the new node to the left subtree if its key is less than that of the root or 
+the right subtree if its key is greater than or equal to the root.
+
+
+package com.gl.dsa;
+class Node
+{
+    int data;
+    Node left, right;
+ 
+    // Function to create a new binary tree node having a given key
+    Node(int key)
+    {
+        data = key;
+        left = right = null;
+    }
+}
+public class BSTSample {
+
+	  public static void inorder(Node root)
+	    {
+	        if (root == null) {
+	            return;
+	        }
+	 
+	        inorder(root.left);
+	        System.out.print(root.data + " ");
+	        inorder(root.right);
+	    }
+	 
+	    // Recursive function to insert a key into a BST
+	    public static Node insert(Node root, int key)
+	    {
+	        // if the root is null, create a new node and return it
+	        if (root == null) {
+	            return new Node(key);
+	        }
+	 
+	        // if the given key is less than the root node,
+	        // recur for the left subtree
+	        if (key < root.data) {
+	            root.left = insert(root.left, key);
+	        }
+	 
+	        // otherwise, recur for the right subtree
+	        else {
+	            // key >= root.data
+	            root.right = insert(root.right, key);
+	        }
+	 
+	        return root;
+	    }
+	 
+	    // Function to construct a BST from given keys
+	    public static Node constructBST(int[] keys)
+	    {
+	        Node root = null;
+	        for (int key: keys) {
+	            root = insert(root, key);
+	        }
+	        return root;
+	    }
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] keys = { 15, 10, 20, 8, 12, 16, 25 };
+		 
+        Node root = constructBST(keys);
+        inorder(root);
+
+	}
+
+}
+
+
+---------------------------------------------
+Construct a balanced BST from the given keys
+Write a Program to Construct a BST from the given Keys
+
+Given an unsorted integer array that represents binary search tree (BST) keys, construct a height-balanced BST from it. 
+For each node of a height-balanced tree, the difference between its left and right subtree height is at most 1.
+
+For example,
+
+Input: keys = [15, 10, 20, 8, 12, 16, 25]
+ 
+Output:
+ 
+       15
+     /    \
+    10     20
+   /  \   /  \
+  8   12 16  25
+ 
+OR
+ 
+       12
+     /    \
+    10    20
+   /     /  \
+  8     16  25
+       /
+      15
+ 
+OR
+ 
+Any other possible representation.
+
+We have already discussed how to insert a key into a BST. The height of such BST in the worst-case can be as much as the 
+total number of keys in the BST. The worst case happens when given keys are sorted in ascending or descending order and we get a 
+skewed tree where all the nodes except the leaf have one and only one child.
+
+For height-balanced BSTs, with each comparison, skip about half of the tree so that each insertion operation takes time 
+proportional to the logarithm of the total number of items n stored in the tree, i.e., log2n. 
+This is much better than the linear time required to find items by key in an (unsorted) array or unbalanced trees.
+
+ 
+We can easily modify the solution to get height-balanced BSTs if all keys are known in advance. 
+The idea is to sort the given keys first. Then the root will be the middle element of the sorted array and we recursively 
+construct the left subtree of the root by keys less than the middle element and the 
+right subtree of the root by keys more than the middle element. For example,
+
+--------------
+package com.gl.dsa1;
+import java.util.Arrays;
+
+//A class to store a BST node
+class Node
+{
+ int data;
+ Node left = null, right = null;
+
+ Node(int data) {
+     this.data = data;
+ }
+}
+public class BSTConstruction {
+
+	 // Function to perform inorder traversal on the tree
+    public static void inorder(Node root)
+    {
+        if (root == null) {
+            return;
+        }
+ 
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+ 
+    // Function to construct balanced BST from the given sorted array
+    public static Node convert(int[] keys, int low, int high, Node root)
+    {
+        // base case
+        if (low > high) {
+            return root;
+        }
+ 
+        // find the middle element of the current range
+        int mid = (low + high) / 2;
+ 
+        // construct a new node from the middle element and assign it to the root
+        root = new Node(keys[mid]);
+ 
+        // left subtree of the root will be formed by keys less than middle element
+        root.left = convert(keys, low, mid - 1, root.left);
+ 
+        // right subtree of the root will be formed by keys more than the
+        // middle element
+        root.right = convert(keys, mid + 1, high, root.right);
+ 
+        return root;
+    }
+ 
+    // Function to construct balanced BST from the given unsorted array
+    public static Node convert(int[] keys)
+    {
+        // sort the keys first
+        Arrays.sort(keys);
+ 
+        // construct a balanced BST and return the root node of the tree
+        return convert(keys, 0, keys.length - 1, null);
+    }
+ 
+    public static void main(String[] args)
+    {
+        // input keys
+        int[] keys = { 15, 10, 20, 8, 12, 16, 25 };
+ 
+        // construct a balanced binary search tree
+        Node root = convert(keys);
+ 
+        // print the keys in an inorder fashion
+        inorder(root);
+    }
+
+}
+
+-----------------
+BINARY TREE IMPLEMENTATION:
+package com.gl.dsa1;
+class TLNode
+{
+ int data;
+ TLNode left,right;
+ 
+ TLNode(int d)
+ {
+   data=d;
+  }
+}
+public class BinaryTreeSample {
+	
+	static void preorder(TLNode r)
+	   {
+			if(r==null)
+			    return;
+			
+			System.out.print(r.data+" ");
+			
+			preorder(r.left);
+			preorder(r.right);
+			
+	   }
+	   static void inorder(TLNode r)
+	   {
+			if(r==null)
+			    return;
+			
+			
+			inorder(r.left);
+			System.out.print(r.data+" ");
+			inorder(r.right);
+			
+	   }
+	   static void postorder(TLNode r)
+	   {
+			if(r==null)
+			    return;
+			
+			
+			postorder(r.left);
+			postorder(r.right);
+			System.out.print(r.data+" ");
+
+	   }
+	     
+	    public static void main(String[] args)
+		{
+			TLNode root=new TLNode(1);
+			
+			root.left=new TLNode(2);
+			root.right=new TLNode(3);
+			
+			root.left.left=new TLNode(4);
+			root.left.right=new TLNode(5);
+			
+			root.right.left=new TLNode(6);
+			root.right.right=new TLNode(7);
+			System.out.println("Elements of a Binary Tree in PREORDER");
+			preorder(root);
+			System.out.println();
+			System.out.println("Elements of a Binary Tree in INORDER");
+			inorder(root);
+			System.out.println();
+			System.out.println("Elements of a Binary Tree in POSTORDER");
+			postorder(root);
+			System.out.println();
+			
+			
+		}
+
+}
+---------------------
+BST Construction Insertion, Deletion & And Search an Element in BST
+
+package com.gl.dsa2;
+class TLNode{
+
+	int data;
+	TLNode left,right;
+	
+	TLNode(int d)
+	{
+		data=d;
+	}
+ }
+public class BinarySearchTreeSample {
+	
+TLNode root;
+	
+	TLNode insert(int d,TLNode root)
+	{
+	  if(root==null)
+	    root=new TLNode(d);
+	  
+      else if(d<=root.data)
+		root.left=insert(d,root.left);
+	
+	  else
+		root.right=insert(d,root.right);
+	
+	  return root;
+	}
+	
+	TLNode search(int d,TLNode root)
+	{
+		if(root.data==d)
+			return root;
+		else if(d<root.data)
+			return search(d,root.left);
+	    else
+			return search(d,root.right);
+	}
+	
+	
+	
+	void inorder(TLNode r)
+   {
+		if(r==null)
+		    return;
+		
+		
+		inorder(r.left);
+		System.out.println(r.data);
+		inorder(r.right);
+		
+   }
+   
+
+TLNode delete(TLNode root, int data) 
+    { 
+        
+        if (root == null)  return root; 
+ 
+        if (data < root.data) 
+            root.left = delete(root.left, data); 
+        else if (data > root.data) 
+            root.right = delete(root.right, data); 
+  
+        else
+        { 
+            
+            if (root.left == null) 
+                return root.right; 
+            else if (root.right == null) 
+                return root.left; 
+  
+            
+            root.data = minValue(root.right); 
+  
+            root.right = delete(root.right, root.data); 
+        } 
+  
+        return root; 
+    } 	
+   int minValue(TLNode root) 
+    { 
+        int minv = root.data; 
+        while (root.left != null) 
+        { 
+            minv = root.left.data; 
+            root = root.left; 
+        } 
+        return minv; 
+    } 
+
+   
+   public static void main(String[] args)
+   {
+	   BinarySearchTreeSample ob=new BinarySearchTreeSample();
+		ob.root=ob.insert(50,ob.root); 
+                ob.root=ob.insert(30,ob.root); 
+                ob.root=ob.insert(20,ob.root); 
+                ob.root=ob.insert(20,ob.root); 
+                ob.root=ob.insert(70,ob.root); 
+                ob.root=ob.insert(60,ob.root); 
+                ob.root=ob.insert(80,ob.root);    
+		ob.root=ob.delete(ob.root,50);
+		System.out.println("******" +ob.root.data);
+		ob.inorder(ob.root);
+		
+		TLNode find=ob.search(30,ob.root);
+		if(find==null)
+			System.out.println("not found");
+		else
+			System.out.println("found : "+find.data);
+		
+		
+	}
+
+}
+--------------------------------------------------
+Doubly LinkedList(DLL)
+
+Inserting a new node in a doubly linked list is very similar to inserting new node in linked list. 
+There is a little extra work required to maintain the link of the previous node. A node can be inserted in a Doubly Linked List in four ways:
+
+At the front of the DLL. 
+In between two nodes
+After a given node.
+Before a given node.
+At the end of the DLL.
+
+Add a node at the front in a Doubly Linked List:
+The new node is always added before the head of the given Linked List. The task can be performed by using the following 5 steps:
+
+Firstly, allocate a new node (say new_node).
+Now put the required data in the new node.
+Make the next of new_node point to the current head of the doubly linked list.
+Make the previous of the current head point to new_node.
+Lastly, point head to new_node.
+
+
+package com.gl.dsa2;
+//Linked List Class 
+class Node { 
+        int data; 
+        Node prev; 
+        Node next; 
+  
+        // Constructor to create a new node 
+        // next and prev is by default initialized as null 
+        Node(int d) { data = d; } 
+    } 
+
+public class DoublyLinkedList {
+
+	 Node head; // head of list 
+	  
+	    /* Doubly Linked list Node*/
+	// Adding a node at the front of the list
+	public void push(int new_data)
+	{
+	    // 1. allocate node
+	    // 2. put in the data */
+	    Node new_Node = new Node(new_data);
+	 
+	    // 3. Make next of new node as head and previous as NULL
+	    new_Node.next = head;
+	    new_Node.prev = null;
+	 
+	    // 4. change prev of head node to new node
+	    if (head != null)
+	        head.prev = new_Node;
+	 
+	    // 5. move the head to point to the new node
+	    head = new_Node;
+	}
+}
+-----------
+Add a node in between two nodes:
+It is further classified into the following two parts:
+
+Add a node after a given node in a Doubly Linked List:
+We are given a pointer to a node as prev_node, and the new node is inserted after the given node. This can be done using the following 6 steps:
+
+Firstly create a new node (say new_node).
+Now insert the data in the new node.
+Point the next of new_node to the next of prev_node.
+Point the next of prev_node to new_node.
+Point the previous of new_node to prev_node.
+Change the pointer of the new node’s previous pointer to new_node.
+
+// Given a node as prev_node, insert a new node 
+// after the given node
+public void InsertAfter(Node prev_Node, int new_data)
+{
+    // Check if the given prev_node is NULL
+    if (prev_Node == null) {
+        System.out.println(
+            "The given previous node cannot be NULL ");
+        return;
+    }
+ 
+    // 1. allocate node
+    // 2. put in the data 
+    Node new_node = new Node(new_data);
+ 
+    // 3. Make next of new node as next of prev_node
+    new_node.next = prev_Node.next;
+ 
+    // 4. Make the next of prev_node as new_node
+    prev_Node.next = new_node;
+ 
+    // 5. Make prev_node as previous of new_node
+    new_node.prev = prev_Node;
+ 
+    // 6. Change previous of new_node's next node
+    if (new_node.next != null)
+        new_node.next.prev = new_node;
+}
+------------------------
+Add a node before a given node in a Doubly Linked List: 
+Let the pointer to this given node be next_node. This can be done using the following 6 steps. 
+
+Allocate memory for the new node, let it be called new_node.
+Put the data in new_node.
+Set the previous pointer of this new_node as the previous node of the next_node.
+Set the previous pointer of the next_node as the new_node.
+Set the next pointer of this new_node as the next_node.
+Now set the previous pointer of new_node.
+If the previous node of the new_node is not NULL, then set the next pointer of this previous node as new_node.
+Else, if the prev of new_node is NULL, it will be the new head node.
+
+// Given a node as prev_node, insert a new node 
+// after the given node
+public void InsertBefore(Node next_Node, int new_data)
+{
+    // Check if the given next_node is NULL
+    if (next_Node == null) {
+        System.out.println(
+            "The given next node cannot be NULL ");
+        return;
+    }
+ 
+    // 1. Allocate node
+    // 2. Put in the data 
+    Node new_node = new Node(new_data);
+ 
+    // 3. Make previous of new node as previous of prev_node
+    new_node.prev = next_Node.prev;
+ 
+    // 4. Make the prev of next_node as new_node
+    next_Node.prev = new_node;
+ 
+    // 5. Make next_node as next of new_node
+    new_node.next = next_Node;
+ 
+    // 6. Change next of new_node's previous node
+    if (new_node.prev != null)
+        new_node.prev.next = new_node;
+    else
+        head = new_node;
+}
+-------------------
+Add a node at the end in a Doubly Linked List:
+The new node is always added after the last node of the given Linked List. This can be done using the following 7 steps:
+
+Create a new node (say new_node).
+Put the value in the new node.
+Make the next pointer of new_node as null.
+If the list is empty, make new_node as the head.
+Otherwise, travel to the end of the linked list.
+Now make the next pointer of last node point to new_node.
+Change the previous pointer of new_node to the last node of the list.
+
+// Add a node at the end of the list
+void append(int new_data)
+{
+    // 1. allocate node
+    // 2. put in the data
+    Node new_node = new Node(new_data);
+ 
+    Node last = head; /* used in step 5*/
+ 
+    // 3. This new node is going to be the last node, so
+    // make next of it as NULL
+    new_node.next = null;
+ 
+    // 4. If the Linked List is empty, then make the new
+    // node as head
+    if (head == null) {
+        new_node.prev = null;
+        head = new_node;
+        return;
+    }
+ 
+    // 5. Else traverse till the last node
+    while (last.next != null)
+        last = last.next;
+ 
+    // 6. Change the next of last node
+    last.next = new_node;
+ 
+    // 7. Make last node as previous of new node
+    new_node.prev = last;
+}
+------------------

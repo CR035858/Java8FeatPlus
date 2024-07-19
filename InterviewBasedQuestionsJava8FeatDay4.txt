@@ -1,0 +1,1083 @@
+Java 8 Features Interview based questions
+
+
+https://blog.devgenius.io/java-8-coding-and-programming-interview-questions-and-answers-62512c44f062
+https://www.edureka.co/blog/interview-questions/java-collections-interview-questions/
+https://medium.com/techie-delight/queue-data-structure-practice-problems-and-interview-questions-f459bf0578db
+---------------------
+Solutions:
+Project : GLCA_InterviewJ8Feat
+WorkSpace : WSpace2023
+1.Given a list of integers, find out all the even numbers that exist in the list using Stream functions?//DONE
+2. Given a list of integers, find out all the numbers starting with 1 using Stream functions?// DONE
+3. How to find duplicate elements in a given integers list in java using Stream functions? //DONE
+4. Given the list of integers, find the first element of the list using Stream functions? //DONE
+5. Given a list of integers, find the total number of elements present in the list using Stream functions?//DONE
+6. Given a list of integers, find the maximum value element present in it using Stream functions? // DONE
+7. Java 8 program to perform cube on list elements and filter numbers greater than 50. //DONE
+8. How to use map to convert object into Uppercase in Java 8? //DONE
+9. How to find only duplicate elements with its count from the String ArrayList in Java8? // DONE
+10. Given a String, find the first repeated character in it using Stream functions? //DONE
+11.  Given a list of integers, sort all the values present in it using Stream functions? //DONE
+12. How will you get the current date and time using Java 8 Date and Time API? //DONE
+13. How to count each element/word from the String ArrayList in Java8?/DONE
+
+OTHERS
+https://intellipaat.com/blog/interview-question/java-8-interview-questions/
+https://www.interviewbit.com/java-8-interview-questions/
+https://quescol.com/interview-preparations/java-8-coding-interview-question
+
+https://www.educative.io/blog/java-8-functional-programming-interview-questions
+
+https://javabydeveloper.com/java-8-supplier-functional-interface-with-examples/
+https://www.w3resource.com/java-exercises/collection/index.php
+
+https://www.w3resource.com/java-exercises/collection/index.php#linkedlist
+
+USING FOR Day 1/2 Week 2
+https://www.w3resource.com/java-exercises/collection/index.php#linkedlist
+Used Currently for Q&A for the collections
+https://www.interviewbit.com/java-collections-interview-questions/
+=======================================================================================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class DuplicateElementsInString {
+
+	/*
+	 * How to find only duplicate elements with its 
+	 * count from the String ArrayList in Java8?
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<String> names = Arrays.asList("AA", "BB", "AA", "CC");
+	      Map<String,Long> namesCount = names
+	                                   .stream()
+	                       .filter(x->Collections.frequency(names, x)>1)
+	                       .collect(Collectors.groupingBy
+	                       (Function.identity(), Collectors.counting()));
+	      System.out.println(namesCount);
+
+	}
+
+}
+=========================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class CubeOfNumbers {
+
+	/*
+	 * Java 8 program to perform cube on list elements and 
+	 * filter numbers greater than 50.
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Print Cube Of Numbers greater than 50
+		  List<Integer> integerList = Arrays.asList(4,5,6,7,1,2,3);
+	       integerList.stream()
+	                  .map(i -> i*i*i)
+	                  .filter(i -> i>50)
+	                  .forEach(System.out::println);
+
+	}
+
+}
+================================
+package com.gl.glca;
+
+public class DateAndTime {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		 System.out.println("Current Local Date: " + java.time.LocalDate.now());
+	        //Used LocalDate API to get the date
+	        System.out.println("Current Local Time: " + java.time.LocalTime.now());
+	        //Used LocalTime API to get the time
+	        System.out.println("Current Local Date and Time: " + java.time.LocalDateTime.now());
+	        //Used LocalDateTime API to get both date and time
+	}
+
+}
+============================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class DuplicateNumbers {
+/*
+ * How to find duplicate elements in a given integers 
+ * list in java using Stream functions?
+ */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		 List<Integer> myList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+         Set<Integer> set = new HashSet();
+         myList.stream()
+               .filter(n -> !set.add(n))
+               .forEach(System.out::println);
+	}
+
+}
+=================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class EvenNumbers {
+/*
+ * Given a list of integers, 
+ * find out all the even numbers that exist in the list using Stream functions?
+ */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		   List<Integer> list = Arrays.asList(10,15,8,49,25,98,32);
+           list.stream()
+               .filter(n -> n%2 == 0)
+               .forEach(System.out::println);
+       }
+	}
+==============================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class FirstElement {
+
+	/*
+	 * Given the list of integers, 
+	 * find the first element of the list using Stream functions?
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<Integer> myList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+         myList.stream()
+               .findFirst()
+               .ifPresent(System.out::println);
+
+	}
+
+}
+=====================
+package com.gl.glca;
+
+import java.util.LinkedHashMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class FirstRepeatedCharacter {
+
+	/*
+	 * Given a String, find the first repeated character in it using Stream functions? 
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String input = "Java Articles are Awesome";
+
+        Character result = input.chars() // Stream of String       
+                                .mapToObj(s -> Character.toLowerCase(Character.valueOf((char) s))) // First convert to Character object and then to lowercase         
+                                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting())) //Store the chars in map with count 
+                                .entrySet()
+                                .stream()
+                                .filter(entry -> entry.getValue() > 1L)
+                                .map(entry -> entry.getKey())
+                                .findFirst()
+                                .get();
+        System.out.println(result);         
+
+	}
+
+}
+
+================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class MaximumValue {
+ /*
+  *  Given a list of integers, 
+  *  find the maximum value element present in it using Stream functions?
+  */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<Integer> myList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+         int max =  myList.stream()
+                          .max(Integer::compare)
+                          .get();
+         System.out.println(max);  
+
+	}
+
+}
+=======================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class SortedElements {
+
+	/*
+	 * Given a list of integers, 
+	 * sort all the values present in it using Stream functions? 
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<Integer> myList = Arrays.asList(10,15,8,49,25,98,98,32,15);
+
+         myList.stream()
+               .sorted()
+               .forEach(System.out::println);
+
+	}
+
+}
+=======================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class StringCounter {
+
+	/*
+	 * How to count each element/word from the String ArrayList in Java8
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<String> names = Arrays.asList("AA", "BB", "AA", "CC");
+	        Map<String,Long> namesCount = names
+	                                .stream()
+	                                .collect(
+	                                 Collectors.groupingBy(
+	                                   Function.identity()
+	                                 , Collectors.counting()
+	                                 ));
+	        System.out.println(namesCount);
+
+	}
+
+}
+---------------------
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class StringCounter {
+
+	/*
+	 * How to count each element/word from the String ArrayList in Java8
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<String> names = Arrays.asList("AA", "BB", "AA", "CC");
+	        Map<String,Long> namesCount = names
+	                                .stream()
+	                                .collect(
+	                                 Collectors.groupingBy(
+	                                   Function.identity()
+	                                 , Collectors.counting()
+	                                 ));
+	        System.out.println(namesCount);
+
+	}
+
+}
+================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class UpperCase {
+
+	/*
+	 * How to use map to convert object into Uppercase in Java 8?
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 List<String> names = Arrays.asList("aa", "bb", "cc", "dd");
+		 List<String> nameLst = names.stream()
+                 .map(String::toUpperCase)
+                 .collect(Collectors.toList());
+		 System.out.println(nameLst);
+	}
+
+}
+
+==========================
+import java.util.function.Predicate;
+public class PredicateInterfaceExample1 {
+    public static void main(String[] args)
+    {
+        // Creating a predicate
+        Predicate <Integer> mylesserthan = i -> (i < 30); 
+  
+        // Calling Predicate method
+        System.out.println(mylesserthan.test(9)); 
+    }
+}
+
+------------
+import java.util.function.Predicate;
+public class PredicateInterfaceExample2 {
+    public static void main(String[] args)
+    {
+        Predicate <Integer> biggerThanTen = (i) -> i > 10;
+  
+        // Creating predicate
+        Predicate<Integer> smallerThanTwenty = (i) -> i < 20; 
+        boolean resultOne = biggerThanTen.and(smallerThanTwenty).test(15);
+        System.out.println(resultOne);
+  
+        // Calling Predicate method
+        boolean resultTwo = biggerThanTen.and(smallerThanTwenty).negate().test(15);
+        System.out.println(resultTwo);
+    }
+}
+--------------------
+public static Predicate<String> hasGotLengthOf10 = new Predicate<String>() {
+        @Override
+        public boolean test(String t)
+        {
+            return t.length() > 10;
+        }
+    };
+     public static void my_predicate_or()
+    {
+  	  Predicate<String> containsLetterA = p -> p.contains("A");
+        String containsA = "AndAll";
+        boolean outcome =hasGotLengthOf10.or(containsLetterA).test(containsA);
+        System.out.println(outcome);
+    }
+    public static void main(String[] args)
+    {
+    my_predicate_or();
+    }
+=========================
+Predicate <Integer> biggerThanTen = (i) -> i > 10;
+		  
+        // Creating predicate
+        Predicate<Integer> smallerThanTwenty = (i) -> i < 20; 
+        boolean resultOne = biggerThanTen.and(smallerThanTwenty).test(15);
+        System.out.println(resultOne);
+  
+        // Calling Predicate method
+        boolean resultTwo = biggerThanTen.and(smallerThanTwenty).negate().test(15);
+        System.out.println(resultTwo);
+===============================
+public void whenNamesPresentConsumeAll(){	Consumer<String> printConsumer = t -> System.out.println(t);	Stream<String> cities = Stream.of(“Chennai", “Goa", “Bangalore", “Mumbai");	cities.forEach(printConsumer);}
+
+
+public void whenNamesPresentConsumeAll()
+{
+
+	Consumer<String> printConsumer = t -> System.out.println(t);	
+Stream<String> cities = Stream.of(“Chennai", “Goa", “Bangalore", “Mumbai");	
+cities.forEach(printConsumer);
+}
+
+public void whenNamesPresentUseBothConsumer(){
+    List<String> cities = Arrays.asList(“Chennai", “Goa", “Bangalore", “Mumbai");
+
+    Consumer<List<String>> upperCaseConsumer = list -> {
+        for(int i=0; i< list.size(); i++){
+            list.set(i, list.get(i).toUpperCase());
+        }
+    };
+    Consumer<List<String>> printConsumer = list -> list.stream().forEach(System.out::println);
+
+    upperCaseConsumer.andThen(printConsumer).accept(cities);
+}
+========================
+package com.gl.glca;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+
+public class ConsumerSample {
+
+	public void whenNamesPresentUseBothConsumer(){
+	    List<String> cities = Arrays.asList("Chennai", "Goa", "Bangalore", "Mumbai");
+
+	    Consumer<List<String>> upperCaseConsumer = list -> {
+	        for(int i=0; i< list.size(); i++){
+	            list.set(i, list.get(i).toUpperCase());
+	        }
+	    };
+	    Consumer<List<String>> printConsumer = list -> list.stream().forEach(System.out::println);
+
+	    upperCaseConsumer.andThen(printConsumer).accept(cities);
+	}
+	public void whenNamesPresentConsumeAll()
+	{
+
+		Consumer<String> printConsumer = t -> System.out.println(t);	
+	Stream<String> cities = Stream.of("Chennai", "Goa", "Bangalore", "Mumbai");	
+	cities.forEach(printConsumer);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ConsumerSample cons = new ConsumerSample();
+		cons.whenNamesPresentConsumeAll();
+		cons.whenNamesPresentUseBothConsumer();
+
+	}
+
+}
+-------------------------------
+static String product = "Android";
+  static double price = 659.50;
+   
+    public static void main(String[] args) {
+        
+        BooleanSupplier boolSupplier = () -> product.length() == 10;
+        IntSupplier intSupplier = () -> product.length() - 2;
+        DoubleSupplier doubleSupplier = () -> price -20;
+        LongSupplier longSupplier = () -> new Date().getTime();
+        Supplier<String> supplier = () -> product.toUpperCase();
+        
+        
+        System.out.println(boolSupplier.getAsBoolean());//false
+        System.out.println(intSupplier.getAsInt());//5
+        System.out.println(doubleSupplier.getAsDouble());//639.5
+        System.out.println(longSupplier.getAsLong());// 1581187440978 (it depends on current time)
+        System.out.println(supplier.get());//ANDROID
+        
+    }
+
+--------
+public void supplier()
+{
+Supplier<Double> doubleSupplier1 = () -> Math.random();
+DoubleSupplier doubleSupplier2 = Math::random;
+System.out.println(doubleSupplier1.get());
+System.out.println(doubleSupplier2.getAsDouble());
+}
+
+
+public void supplierWithOptional()
+{
+Supplier<Double> doubleSupplier = () -> Math.random();
+Optional<Double> optionalDouble = Optional.empty();
+System.out.println(optionalDouble.orElseGet(doubleSupplier));
+
+}
+=============================
+package com.gl.glca;
+
+import java.sql.Date;
+import java.util.Optional;
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
+import java.util.function.LongSupplier;
+import java.util.function.Supplier;
+
+public class SupplierExample {
+	static String product = "Android";
+	  static double price = 659.50;
+	  public void supplier()
+	  {
+		  Supplier<Double> doubleSupplier1 = () -> Math.random();
+		  DoubleSupplier doubleSupplier2 = Math::random;
+		  System.out.println(doubleSupplier1.get());
+		  System.out.println(doubleSupplier2.getAsDouble());
+	  } 
+	  public void supplierWithOptional()
+	  {
+		  Supplier<Double> doubleSupplier = () -> Math.random();
+		  Optional<Double> optionalDouble = Optional.empty();
+		  System.out.println(optionalDouble.orElseGet(doubleSupplier));
+
+	  }
+	  
+	    public static void main(String[] args) {
+	        
+	        BooleanSupplier boolSupplier = () -> product.length() == 10;
+	        IntSupplier intSupplier = () -> product.length() - 2;
+	        DoubleSupplier doubleSupplier = () -> price -20;
+	        LongSupplier longSupplier = () -> new Date(27,9,2023).getTime();
+	        Supplier<String> supplier = () -> product.toUpperCase();
+	        
+	        
+	        System.out.println(boolSupplier.getAsBoolean());//false
+	        System.out.println(intSupplier.getAsInt());//5
+	        System.out.println(doubleSupplier.getAsDouble());//639.5
+	        System.out.println(longSupplier.getAsLong());// 1581187440978 (it depends on current time)
+	        System.out.println(supplier.get());//ANDROID
+	        
+	        SupplierExample spax = new SupplierExample();
+	        spax.supplier();
+	        spax.supplierWithOptional();
+	        
+	    }
+
+}
+-----------------------------------------
+Write a Java program to replace the second element of an ArrayList with the specified element.
+
+package com.gl.glca;
+
+import java.util.ArrayList;
+
+public class ArrayListSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<String>  color = new ArrayList<String>();
+
+		  color.add("Red");
+		  color.add("Green");
+		  color.add("Violet");
+		  color.add("Blue");
+
+		  System.out.println("Original array list: " + color);
+		  String new_color = "White";
+		  color.set(1,new_color);
+
+		  int num=color.size();
+		  System.out.println("Replace second element with 'White'."); 
+		  for(int i=0;i<num;i++)
+		  System.out.println(color.get(i));
+
+	}
+
+}
+-----------------------
+Write a Java program to iterate through all elements in a linked list.
+
+package com.gl.colls1;
+
+import java.util.LinkedList;
+
+public class LinkedListSample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 // create an empty linked list
+	     LinkedList <String> l_list = new LinkedList<String>();
+	   // use add() method to add values in the linked list
+	          l_list.add("Karnataka");
+	          l_list.add("Uttar Pradesh");
+	          l_list.add("Madhya Pradesh");
+	          l_list.add("Andhra Pradesh");
+	          l_list.add("Kerala");
+	         // Print the linked list
+	  for (String element : l_list) {
+	    System.out.println(element);
+
+
+	}
+	}
+
+}
+------------------------------------------------------------
+Write a Java program to iterate a linked list in reverse order.
+
+package com.gl.colls1;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class ReversedLinkedList {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		  // create an empty linked list
+	     LinkedList<String> l_list = new LinkedList<String>();
+	   // use add() method to add values in the linked list
+	     l_list.add("Karnataka");
+         l_list.add("Uttar Pradesh");
+         l_list.add("Madhya Pradesh");
+         l_list.add("Andhra Pradesh");
+         l_list.add("Kerala");
+	      
+	        // print original list
+	   System.out.println("Original linked list:" + l_list);  
+	 
+	    Iterator it = l_list.descendingIterator();
+
+	     // Print list elements in reverse order
+	     System.out.println("Elements in Reverse Order:");
+	     while (it.hasNext()) {
+	        System.out.println(it.next());
+	     }
+
+	}
+
+}
+-------------------------------
+Write a Java program to insert elements into the linked list at the first and last positions.
+
+package com.gl.colls1;
+
+import java.util.LinkedList;
+
+public class LinkedListFirstLast {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// create an empty linked list
+   	 		LinkedList<String> l_list = new LinkedList<String>();
+   	 		// use add() method to add values in the linked list
+   	 			l_list.add("Red");
+   	 			l_list.add("Green");
+   	 			l_list.add("Black");
+   	 			System.out.println("Original linked list:" + l_list);    
+   	 		// Add an element at the beginning 
+   	 			l_list.addFirst("White");
+
+   	 		// Add an element at the end of list 
+   	 			l_list.addLast("Pink");
+   	 			System.out.println("Final linked list:" + l_list);  
+
+	}
+
+}
+---------------------------------------
+Write a Java program to insert some elements at the specified position into a linked list.
+
+package com.gl.colls1;
+
+import java.util.LinkedList;
+
+public class LinkedListSpecificPosition {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		 // create an empty linked list
+		  LinkedList <String> l_list = new LinkedList <String> ();
+		  // use add() method to add values in the linked list
+		  l_list.add("Red");
+		  l_list.add("Green");
+		  l_list.add("Black");
+
+		  // print original list
+		  System.out.println("Original linked list:" + l_list);
+
+		  // create a new collection and add some elements
+
+		  LinkedList <String> new_l_list = new LinkedList <String> ();
+		  new_l_list.add("White");
+		  new_l_list.add("Pink");
+
+		  // Add the collection in the second position of the existing linked list
+		  l_list.addAll(1, new_l_list);
+
+		  // print the new list
+		  System.out.println("LinkedList:" + l_list);
+
+	}
+
+}
+------------------------------
+Write a Java program to display elements and their positions in a linked list.
+
+package com.gl.colls1;
+
+import java.util.LinkedList;
+
+public class LinkedListElementsPos {
+
+	public static void main(String[] args) {
+			// TODO Auto-generated method stub
+		 	// create an empty linked list
+			LinkedList<String> l_list = new LinkedList<String>();
+			// use add() method to add values in the linked list
+	          l_list.add("Red");
+	          l_list.add("Green");
+	          l_list.add("Black");
+	          l_list.add("Pink");
+	          l_list.add("orange");
+	      
+	          // print original list
+	          System.out.println("Original linked list:" + l_list);  
+	          for(int p=0; p < l_list.size(); p++)
+	          {
+	        	  System.out.println("Element at index "+p+": "+l_list.get(p));
+	          } 
+	}
+}
+
+-----------------------
+Write a Java program to remove a specified element from a linked list.
+
+package com.gl.colls1;
+
+import java.util.LinkedList;
+
+public class LinkedListElementRemoval {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		 // create an empty linked list
+		  LinkedList <String> l_list = new LinkedList <String> ();
+		  // use add() method to add values in the linked list
+		  l_list.add("Red");
+		  l_list.add("Green");
+		  l_list.add("Black");
+		  l_list.add("Pink");
+		  l_list.add("orange");
+
+		  // print the list
+		  System.out.println("The Original linked list: " + l_list);
+
+		  // Remove the element in third position from the said linked list
+		  l_list.remove(2);
+		  System.out.println("The New linked list: " + l_list);
+
+	}
+
+}
+-----------------
+Write a Java program to create a priority queue, add some colors (strings) and print out the 
+elements of the priority queue(Use Both displaying the Queue directly as well as by using forEach loop through iteration)
+
+package com.gl.colls1;
+
+import java.util.PriorityQueue;
+
+public class SimplePriorityQueue {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		 PriorityQueue<String> queue=new PriorityQueue<String>();  
+		  queue.add("Red");
+		  queue.add("Green");
+		  queue.add("Orange");
+		  queue.add("White");
+		  queue.add("Black");
+		  System.out.println("Elements of the Priority Queue: ");
+		  System.out.println(queue);
+
+	  // iterate the Priority Queue
+		  for (String element : queue) {
+		    System.out.println(element);
+		}
+
+	}
+
+}
+---------------------
+Write a Java program to remove all elements from a priority queue.
+
+package com.gl.colls1;
+
+import java.util.PriorityQueue;
+
+public class ClearPriorityQueue {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create Priority Queue
+        PriorityQueue<String> pq1 = new PriorityQueue<String>();  
+        // use add() method to add values in the Priority Queue
+       pq1.add("Red");
+       pq1.add("Green");
+       pq1.add("Black");
+       pq1.add("White");
+       System.out.println("Original Priority Queue: "+pq1);
+
+       // Removing all the elements from the Priority Queue
+       pq1.clear();
+
+       System.out.println("The New Priority Queue: " + pq1);
+
+	}
+
+}
+---------------------------
+Write a Java program to compare two priority queues.
+
+package com.gl.colls1;
+
+import java.util.PriorityQueue;
+
+public class PriorityQueueComparison {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Create a empty Priority Queue
+        PriorityQueue<String> pq1 = new PriorityQueue<String>();  
+     // use add() method to add values in the Priority Queue
+          pq1.add("Red");
+          pq1.add("Green");
+          pq1.add("Black");
+          pq1.add("White");
+          System.out.println("First Priority Queue: "+pq1);
+          PriorityQueue<String> pq2 = new PriorityQueue<String>();  
+          pq2.add("Red");
+          pq2.add("Pink");
+          pq2.add("Black");
+          pq2.add("Orange");
+          System.out.println("Second Priority Queue: "+pq2);
+          //comparison output in Priority Queue
+         for (String element : pq1){
+             System.out.println(pq2.contains(element) ? "Yes" : "No");
+
+         }
+	}
+
+}
+---------------------------
+Collection
+It's used to represent a collection of separate objects as a single entity.	
+It is an interface.	
+Since Java 8, the Collection is an interface with a static function. Abstract and default methods can also be found in the Interface.
+
+Collections
+It is a utility class.
+It defines a number of useful methods for working with collections.
+It only has static methods in it.
+
+ArrayList is faster than vector operations because it is non-synchronized, but vector operations are slower since they are synchronized (thread-safe).
+Both ArrayList and Vector dynamically expand and shrink to make the most use of storage space, but the manner they do it is different. 
+If the number of elements in an array exceeds its limit, 
+ArrayList increments 50% of the current array size, while vector increments 100%, thereby doubling the current array size.
+
+STACKS
+Stacks works on the LIFO principle, which means that the element inserted at the last will be the first element that will be taken out.
+In stacks, insertion, and deletions take place only from the top.
+Insert operation is called push operation.
+Delete operation is called pop operation.
+The top of a stack always points to the last element in the list, which is the only pointer used to access the list.
+
+QUEUEs
+Queues work on the FIFO principle, which means that the element inserted first will be the first element that will be taken out.
+In queues, insertion occurs at the rear of the list and deletion takes place from the front of the list.
+Insert operation is called enqueue operation.
+Delete operation is called dequeue operation.
+Two pointers are maintained for accessing queues. The front pointer points to the first inserted element, and the rear pointer points to the last inserted element.
+
+------------------------
+Thoughts on 
+DescendingIterator is provided in LinkedList / ArrayList
+Descending Iterator is provided in PriorityQueue/
+--------------------------------------------------
+Iterator vs ListIterator
+ITERATOR
+The Iterator can traverse the array elements in the forward direction.
+It can be used in Queue, List, and Set.
+It can perform only remove operation.
+
+ListIterator
+ListIterator can traverse the array elements in backward as well as forward directions.
+It can be used in List.
+It can perform add, remove, and set operation while traversing the collection.
+
+-----------------------
+Iterator vs Enumeration
+
+The Iterator can traverse both legacies as well as non-legacy elements.	
+The Iterator is fail-fast.	
+The Iterator is very slow compare to Enumeration.	
+The Iterator can perform remove operation while traversing the collection.	
+
+Enumeration
+Enumeration can traverse only legacy elements.
+Enumeration is not fail-fast.
+Enumeration is fast compare to Iterator.
+The Enumeration can perform only traverse operation on the collection.
+-----------------
+13) List out benefits of generic collection
+The benefits of using the generic collection are:
+
+If the programmers are using generic class, they don’t require typecasting.
+It is type-safe and can be checked at the time of compilation.
+It provides the stability of the code by detecting bug at the compilation time.
+------------------------------------------
+NOTES
+QUEUE
+poll(): removes and retrieves the head of the queue. q. 
+peek(): does not remove but only retrieves/returns the head of the queue.
+The remove() and poll() methods differ only in their behavior when the queue is empty: 
+the remove() method throws an exception, while the poll() method returns null.
+STACK:
+public E pop()
+Removes the object at the top of this stack and returns that object as the value of this function.
+public E peek()
+Looks at the object at the top of this stack without removing it from the stack.
+empty() returns boolean
+-----------------------------------
+28) What is the difference between failfast and failsafe?
+Failfast	
+It does not allow collection modification while iterating.	
+It can throw ConcurrentModificationException	
+It uses the original collection to traverse the elements.	
+There is no requirement of extra memory.	
+
+Failsafe
+It allows collection modification while iterating.
+It can’t throw any exception.
+It uses an original collection copy to traverse the elements.
+There is a requirement of extra memory.
+--------------------
+Set /List / Map / Queue/Comparator/Generic/Comparable
+
+Set	
+It is an unordered sequence.	
+Duplicate elements are not permitted in Set.	
+Access to items from a certain position is not permitted.	
+A null element can only be stored once.	
+
+List
+It is an ordered sequence.
+Duplicate elements are allowed in the list
+Elements can be accessed based on their position.
+It is possible to store several null elements.
+------------------------
+HashSet vs TreeSet
+Following are the differences between HashSet and TreeSet:-
+
+Internal implementation and speed
+HashSet: For search, insert, and remove operations, it takes constant time on average. 
+TreeSet is slower than HashSet. A hash table is used to implement HashSet.
+TreeSet: For search, insert, and delete, TreeSet takes O(Log n), which is higher than HashSet. 
+TreeSet, on the other hand, preserves ordered data. Higher() (Returns the least higher element), floor(), ceiling(), 
+and other operations are also supported. In TreeSet, these operations are likewise O(Log n), and HashSet does not implement them. 
+A Self-Balancing Binary Search Tree is used to implement TreeSet (Red Black Tree). In Java, TreeSet is backed by TreeMap.
+Way of storing elements 
+The elements of a HashSet are not ordered. In Java, 
+the TreeSet class keeps objects in a Sorted order defined by the Comparable or Comparator methods. By default, 
+TreeSet components are sorted in ascending order. It has a number of methods for dealing with ordered sets, including first(), last(), headSet(), tailSet(), and so on.
+Allowing Null values 
+Null objects are allowed in HashSet. 
+TreeSet does not allow null objects and throws a NullPointerException. 
+This is because TreeSet compares keys using the compareTo() method, which throws java.lang. NullPointerException.
+Comparison
+HashSet compares two objects in a Set and detects duplicates using the equals() method. 
+For the same purpose, TreeSet employs the compareTo() method. If equals() and compareTo() are not consistent, 
+that is, if equals() returns true for two equal objects but compareTo() returns zero, 
+the contract of the Set interface will be broken, allowing duplicates in Set implementations like TreeSet.
+
+===========================
+SET vs MAP
+
+SET
+It cannot have values that are repeated. It is not possible to add the same elements to a set. 
+Only the unique value is stored in each class that implements the Set interface.
+
+Using the keyset() and entryset() methods, we can quickly iterate the Set items.
+
+The Set interface does not keep track of insertion order. 
+Some of its classes, such as LinkedHashSet, however, keep the insertion order. 
+
+MAP
+It is possible for different keys to have the same value. The map has a unique key and values that are repeated. 
+
+It is not possible to iterate across map elements. To iterate the elements, we must convert Map to Set.
+
+The Map does not keep track of the insertion sequence. Some Map classes, such as TreeMap and LinkedHashMap, do the same thing.
+
+SET 
+===============================
+Comparator vs Comparable
+
+COMPARATOR
+A single sorting sequence is provided by Comparable. To put it another way, we can sort the collection by a single attribute such as id, name, or price.
+To sort elements, Comparable provides the compareTo() method.
+It is present in the java.lang package.
+The original class is affected by Comparable, i.e. the real class is changed. 
+The Collections.sort(List) method can be used to sort Comparable type list members.
+
+COMPARABLE
+Multiple sorting sequences are available in the Comparator. To put it another way, 
+we can sort the collection based on different criteria such as id, name, and price.
+To order elements, the Comparator provides the compare() method.
+It is present in the java.util package.
+The original class is unaffected by the comparator, i.e. the real class is unaffected.
+The Collections.sort(List, Comparator) method can be used to sort the list components of the Comparator type.
+==========================
+HashMap & TreeMap
+
+HashMap
+The Java HashMap implementation of the Map interface is based on hash tables.
+The Map, Cloneable, and Serializable interfaces are implemented by HashMap.
+Because HashMap does not order on keys, it allows for heterogeneous elements.
+HashMap is quicker than TreeMap because it offers O(1) constant-time performance for basic operations such as to get() and put().
+A single null key and numerous null values are allowed in HashMap.
+To compare keys, it uses the Object class's equals() method. It is overridden by the Map class's equals() function.
+HashMap does not keep track of any sort of order.
+When we don't need a sorted key-value pair, we should use the HashMap.
+
+TreeMap
+Java TreeMap is a Map interface implementation based on a Tree structure.
+NavigableMap, Cloneable, and Serializable interfaces are implemented by TreeMap.
+Because of the sorting, TreeMap allows homogenous values to be used as a key.
+TreeMap is slower than HashMap because it performs most operations with O(log(n)) performance, such as add(), remove(), and contains(). 
+TreeMap does not allow null keys, however multiple null values are allowed.
+It compares keys using the compareTo() method.
+The elements are arranged in chronological sequence (ascending).
+When we need a key-value pair in sorted (ascending) order, we should use the TreeMap.
+
+CURRENT
+https://www.interviewbit.com/java-collections-interview-questions/
+
+Hashtable vs HashMap
+
+HashMap
+No method is synchronized.
+Multiple threads can operate simultaneously and hence hashmap’s object is not thread-safe.
+Threads are not required to wait and hence relatively performance is high.
+Null is allowed for both key and value.
+It is non-legacy.
+
+Hashtable
+Every method is synchronized.
+At a time only one thread is allowed to operate the Hashtable’s object. Hence it is thread-safe.
+It increases the waiting time of the thread and hence performance is low.
+Null is not allowed for both key and value. Otherwise, we will get a null pointer exception.
+It is a legacy.
+----------------------------------------------
+HashSet vs HashMap
+
+HashSet
+It implements the Set Interface.
+It does not allow duplicate values.
+While adding an element it requires only one object as a parameter.
+Internally, HashSet uses HashMap to add entries. The key K in a HashSet is the argument supplied in the add(Object) method. 
+For each value supplied in the add(Object) method, Java assigns a dummy value.
+It is slower than HashMap.
+It uses the add() method for adding elements.
+
+HashMap
+
+It implements the Map Interface.
+The key needs to be unique while two different keys can have the same value.
+While adding an entry, it requires two object values, the Key and the Value as the parameter.
+There is no concept of duplicate values.
+It is faster than HashSet.
+It uses the put() method for adding data elements.
